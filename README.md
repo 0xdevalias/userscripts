@@ -28,6 +28,10 @@ But if you use a different browser, or have different preferences, the following
 > 
 > The most popular userscript managers are Greasemonkey, Tampermonkey, and Violentmonkey.
 
+## Userscripts
+
+- TODO: add them here
+
 ## See Also
 
 ### Other things by me
