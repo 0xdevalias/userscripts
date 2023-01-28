@@ -47,6 +47,8 @@ But if you use a different browser, or have different preferences, the following
   - > devalias does dotfiles
 - https://github.com/0xdevalias/chrome-NewWindowWithTabsToRight ([Announcement Blog](https://www.devalias.net/dev/chrome-extensions/new-window-with-tabs-to-right/), [Chrome Webstore](https://chrome.google.com/webstore/detail/new-window-with-tabs-to-r/ldahcfljppchbfgdokomobmfdfplaman))
   - > Create a new window from the tabs to the right of the currently selected tab.
+- https://github.com/0xdevalias/userscripts (this repo!)
+  - > My user scripts to add functionality to various sites around the web (that were too small for me to bother turning into a full-fledged Chrome extension)
 - https://github.com/0xdevalias/awesome-gmail-filters
   - > Awesome list of Gmail filters and related resources
 - My [Homebrew](https://brew.sh/) Contributions
