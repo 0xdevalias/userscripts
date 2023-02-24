@@ -59,7 +59,17 @@ But if you use a different browser, or have different preferences, the following
   - etc
 - Probably a lot more around the net that I haven't thought to link to here.. hope you find something cool/useful out there!
 
-### Other's Userscripts
+### Other's Userscripts / similar sorts of customisations
+
+Pretty much my go-to Chrome extension for making GitHub way more usable:
+
+- https://github.com/refined-github/refined-github ([Chrome](https://chrome.google.com/webstore/detail/refined-github/hlepfoohegkhhmjieoechaddaejaokhf), [Firefox](https://addons.mozilla.org/en-US/firefox/addon/refined-github-/), [Safari](https://apps.apple.com/app/id1519867270))
+  - > Browser extension that simplifies the GitHub interface and adds useful features
+
+Also a super useful Chrome extension for GitHub Notifications:
+
+- https://github.com/tanmayrajani/notifications-preview-github ([Chrome](https://chrome.google.com/webstore/detail/notifications-preview-for/kgilejfahkjidpaclkepbdoeioeohfmj), [Firefox](https://addons.mozilla.org/en-US/firefox/addon/notifications-preview-github/))
+  - > Browser Extension: preview GitHub notifications with same page pop-overs
 
 A non-exhaustive list of userscripts created by others/from other repos/etc:
 
