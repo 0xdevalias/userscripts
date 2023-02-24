@@ -2,6 +2,13 @@
 
 My user scripts to add functionality to various sites around the web (that were too small for me to bother turning into a full-fledged Chrome extension).
 
+## Userscripts
+
+- [GitHub Notifications - Arrow key navigation](./userscripts/github-notifications-arrow-key-navigation/)
+- [Google developer sites - Ensure ?authuser= by default](./userscripts/google-developer-sites-ensure-authuser/)
+- [YouTube Speed Override](./userscripts/youtube-speed-override/)
+- TODO: add more here
+
 ## How to use
 
 Personally I use [Violentmonkey](https://violentmonkey.github.io/) in Chrome:
@@ -28,13 +35,6 @@ But if you use a different browser, or have different preferences, the following
 >   - Supports both GM 3 and GM 4 userscripts.
 > 
 > The most popular userscript managers are Greasemonkey, Tampermonkey, and Violentmonkey.
-
-## Userscripts
-
-- [GitHub Notifications - Arrow key navigation](./userscripts/github-notifications-arrow-key-navigation/)
-- [Google developer sites - Ensure ?authuser= by default](./userscripts/google-developer-sites-ensure-authuser/)
-- [YouTube Speed Override](./userscripts/youtube-speed-override/)
-- TODO: add more here
 
 ## See Also
 
