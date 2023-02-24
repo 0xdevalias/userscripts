@@ -32,6 +32,7 @@ But if you use a different browser, or have different preferences, the following
 ## Userscripts
 
 - [GitHub Notifications - Arrow key navigation](./userscripts/github-notifications-arrow-key-navigation/)
+- [Google developer sites - Ensure ?authuser= by default](./userscripts/google-developer-sites-ensure-authuser/)
 - [YouTube Speed Override](./userscripts/youtube-speed-override/)
 - TODO: add more here
 
