@@ -31,7 +31,8 @@ But if you use a different browser, or have different preferences, the following
 
 ## Userscripts
 
-- TODO: add them here
+- [YouTube Speed Override](./userscripts/youtube-speed-override/)
+- TODO: add more here
 
 ## See Also
 
