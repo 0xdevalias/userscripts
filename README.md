@@ -8,6 +8,7 @@ Personally I use [Violentmonkey](https://violentmonkey.github.io/) in Chrome:
 
 - [Violentmonkey](https://violentmonkey.github.io/) ([Install](https://violentmonkey.github.io/get-it/), [Chrome](https://chrome.google.com/webstore/detail/violentmonkey/jinjaccalgkegednnccohejagnlnfdag?hl=en), [Source](https://github.com/violentmonkey/violentmonkey))
   - [Creating a userscript](https://violentmonkey.github.io/guide/creating-a-userscript/)
+  - [`GM_*` APIs](https://violentmonkey.github.io/api/gm/)
 
 But if you use a different browser, or have different preferences, the following more comprehensive guide was extracted from the [bvolpato/awesome-userscripts README](https://github.com/bvolpato/awesome-userscripts#how-to-use):
 
