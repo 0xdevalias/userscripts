@@ -1,4 +1,4 @@
-# 0xdevalias' userscripts
+# Glenn 'devalias' Grant's userscripts
 
 My user scripts to add functionality to various sites around the web (that were too small for me to bother turning into a full-fledged Chrome extension).
 
