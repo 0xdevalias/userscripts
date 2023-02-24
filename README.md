@@ -31,6 +31,7 @@ But if you use a different browser, or have different preferences, the following
 
 ## Userscripts
 
+- [GitHub Notifications - Arrow key navigation](./userscripts/github-notifications-arrow-key-navigation/)
 - [YouTube Speed Override](./userscripts/youtube-speed-override/)
 - TODO: add more here
 
