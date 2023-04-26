@@ -6,7 +6,7 @@
 // @description   Ensure that ?authuser=1/etc is used on Google developer sites by default
 // @author        Glenn 'devalias' Grant (devalias.net)
 // @namespace     https://www.devalias.net/
-// @version       1.0
+// @version       1.0.1
 // @match         *://developers.google.com/*
 // @match         *://cloud.google.com/*
 // @match         *://console.cloud.google.com/*

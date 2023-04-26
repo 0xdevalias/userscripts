@@ -3,7 +3,7 @@
 // @description   Ensure that ?authuser=1/etc is used on Google developer sites by default
 // @author        Glenn 'devalias' Grant (devalias.net)
 // @namespace     https://www.devalias.net/
-// @version       1.0
+// @version       1.0.1
 // @match         *://developers.google.com/*
 // @match         *://cloud.google.com/*
 // @match         *://console.cloud.google.com/*
@@ -15,13 +15,13 @@
 const searchParams = new URLSearchParams(window.location.search);
 
 if (!searchParams.has('authuser')) {
-  const isPioneera = window.location.href.includes('pioneera');
+  // const isFoo = window.location.href.includes('foo');
 
-  if (isPioneera) {
-    searchParams.set('authuser', 2)
-  } else {
-    searchParams.set('authuser', 1)
-  }
+  // if (isFoo) {
+  //   searchParams.set('authuser', 2)
+  // } else {
+  searchParams.set('authuser', 1)
+  // }
 
   window.location.search = searchParams
 }
