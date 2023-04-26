@@ -4,6 +4,7 @@ My user scripts to add functionality to various sites around the web (that were 
 
 ## Userscripts
 
+- [GitHub Gist - CodeMirror Resizer](./userscripts/github-gist-codemirror-resizer/)
 - [GitHub Notifications - Arrow key navigation](./userscripts/github-notifications-arrow-key-navigation/)
 - [Google developer sites - Ensure ?authuser= by default](./userscripts/google-developer-sites-ensure-authuser/)
 - [YouTube Speed Override](./userscripts/youtube-speed-override/)
