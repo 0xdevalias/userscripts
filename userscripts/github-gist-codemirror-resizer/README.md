@@ -11,3 +11,5 @@
 // @grant         none
 // ==/UserScript==
 ```
+
+- [Install](https://github.com/0xdevalias/userscripts/raw/main/userscripts/github-gist-codemirror-resizer/github-gist-codemirror-resizer.user.js)

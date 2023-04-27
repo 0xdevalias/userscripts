@@ -11,3 +11,5 @@
 // @grant        none
 // ==/UserScript==
 ```
+
+- [Install](https://github.com/0xdevalias/userscripts/raw/main/userscripts/youtube-speed-override/youtube-speed-override.user.js)

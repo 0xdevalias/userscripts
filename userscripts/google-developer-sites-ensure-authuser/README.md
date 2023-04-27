@@ -13,3 +13,5 @@
 // @grant         none
 // ==/UserScript==
 ```
+
+- [Install](https://github.com/0xdevalias/userscripts/raw/main/userscripts/google-developer-sites-ensure-authuser/google-developer-sites-ensure-authuser.user.js)

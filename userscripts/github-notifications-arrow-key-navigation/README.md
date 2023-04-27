@@ -11,3 +11,5 @@
 // @grant       none
 // ==/UserScript==
 ```
+
+- [Install](https://github.com/0xdevalias/userscripts/raw/main/userscripts/github-notifications-arrow-key-navigation/github-notifications-arrow-key-navigation.user.js)
