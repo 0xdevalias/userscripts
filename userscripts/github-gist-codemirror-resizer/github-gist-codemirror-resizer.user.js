@@ -3,7 +3,7 @@
 // @description   Makes the CodeMirror editor resizable when creating/editing a gist on GitHub
 // @author        Glenn 'devalias' Grant (devalias.net)
 // @namespace     https://www.devalias.net/
-// @version       1.0
+// @version       1.1
 // @match         https://gist.github.com/*
 // @grant         none
 // ==/UserScript==
@@ -13,32 +13,47 @@
 (function() {
   'use strict';
 
+  const containerSelector = '#gist-pjax-container > div.container-lg';
+
+  const editorSelector = '.CodeMirror';
+
+  const resizeContainer = (container) => {
+    container.style.maxWidth = '90vw';
+  }
+
   const resizeEditor = (editor) => {
     editor.style.resize = 'vertical';
-    editor.style.height = '70vh';
-    // editor.style.height = 'auto';
-    // editor.CodeMirror.refresh();
+    editor.style.height = '75vh';
   };
 
-  const observer = new MutationObserver((mutationsList, observer) => {
-    for (let mutation of mutationsList) {
-      if (mutation.type === 'attributes' && mutation.attributeName === 'style') {
-        const editor = mutation.target;
-        resizeEditor(editor);
+  const createAttributeObserver = (target, callback, attribute = 'style') => {
+    const observer = new MutationObserver((mutationsList, observer) => {
+      for (let mutation of mutationsList) {
+        if (mutation.type === 'attributes' && mutation.attributeName === attribute) {
+          const element = mutation.target;
+          callback(element);
+        }
       }
-    }
-  });
+    });
+    observer.observe(target, { attributes: true });
+    return observer;
+  }
 
-  const initObserver = function() {
-    const editor = document.querySelector('.CodeMirror');
-    if (!editor) {
-      setTimeout(initObserver, 1000); // retry after 1 second
+  const initObservers = function() {
+    const container = document.querySelector(containerSelector);
+    const editor = document.querySelector(editorSelector);
+
+    if (!container || !editor) {
+      setTimeout(initObservers, 1000); // retry after 1 second
       return;
     }
 
+    resizeContainer(container);
     resizeEditor(editor);
-    observer.observe(editor, { attributes: true });
+
+    const containerObserver = createAttributeObserver(container, resizeContainer, 'style');
+    const editorObserver = createAttributeObserver(editor, resizeEditor, 'style');
   };
 
-  initObserver();
+  initObservers();
 })();
