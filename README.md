@@ -18,6 +18,8 @@ Personally I use [Violentmonkey](https://violentmonkey.github.io/) in Chrome:
   - [Creating a userscript](https://violentmonkey.github.io/guide/creating-a-userscript/)
   - [`GM_*` APIs](https://violentmonkey.github.io/api/gm/)
 
+That said, TamperMonkey has support for some more experimental features/API's that Violentmonley doesn't/won't support (eg. [`GM_webRequest(rules, listener)`](https://www.tampermonkey.net/documentation.php?locale=en#api:GM_webRequest), [`GM_cookie.*`](https://www.tampermonkey.net/documentation.php?locale=en#api:GM_cookie.list), etc; Ref: [violentmonkey#583](https://github.com/violentmonkey/violentmonkey/issues/583), [tampermonkey#397](https://github.com/Tampermonkey/tampermonkey/issues/397))
+
 But if you use a different browser, or have different preferences, the following more comprehensive guide was extracted from the [bvolpato/awesome-userscripts README](https://github.com/bvolpato/awesome-userscripts#how-to-use):
 
 > To use user scripts you need to first install a user script manager. Here are managers for various browsers:
