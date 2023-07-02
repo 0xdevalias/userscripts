@@ -74,6 +74,8 @@
   ];
 
   const sectionsToMatch = [
+    "offer-section-DIGITAL_WEEK_GAMES",
+    "offer-section-RECOMMENDED",
     "offer-section-TOP_PICKS",
     "offer-section-EXPIRING",
     "offer-section-FGWP",
