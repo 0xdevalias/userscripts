@@ -8,6 +8,7 @@ My user scripts to add functionality to various sites around the web (that were 
 - [GitHub Gist - CodeMirror Resizer](./userscripts/github-gist-codemirror-resizer/) ([Install](https://github.com/0xdevalias/userscripts/raw/main/userscripts/github-gist-codemirror-resizer/github-gist-codemirror-resizer.user.js))
 - [GitHub Notifications - Arrow key navigation](./userscripts/github-notifications-arrow-key-navigation/) ([Install](https://github.com/0xdevalias/userscripts/raw/main/userscripts/github-notifications-arrow-key-navigation/github-notifications-arrow-key-navigation.user.js))
 - [Google developer sites - Ensure ?authuser= by default](./userscripts/google-developer-sites-ensure-authuser/) ([Install](https://github.com/0xdevalias/userscripts/raw/main/userscripts/google-developer-sites-ensure-authuser/google-developer-sites-ensure-authuser.user.js))
+- [Nourishd Meal Highlighter](./userscripts/nourishd-meal-highlighter/) ([Install](https://github.com/0xdevalias/userscripts/raw/main/userscripts/nourishd-meal-highlighter/nourishd-meal-highlighter.user.js))
 - [YouTube Speed Override](./userscripts/youtube-speed-override/) ([Install](https://github.com/0xdevalias/userscripts/raw/main/userscripts/youtube-speed-override/youtube-speed-override.user.js))
 
 ## How to use
