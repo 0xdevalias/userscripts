@@ -5,6 +5,7 @@ My user scripts to add functionality to various sites around the web (that were 
 ## Userscripts
 
 - [Amazon Prime Gaming Highlighter](./userscripts/amazon-prime-gaming-highlighter/) ([Install](https://github.com/0xdevalias/userscripts/raw/main/userscripts/amazon-prime-gaming-highlighter/amazon-prime-gaming-highlighter.user.js))
+- [ChatGPT Web App Script Update Notifier](./userscripts/chatgpt-web-app-script-update-notifier/) ([Install](https://github.com/0xdevalias/userscripts/raw/main/userscripts/chatgpt-web-app-script-update-notifier/chatgpt-web-app-script-update-notifier.user.js))
 - [GitHub Gist - CodeMirror Resizer](./userscripts/github-gist-codemirror-resizer/) ([Install](https://github.com/0xdevalias/userscripts/raw/main/userscripts/github-gist-codemirror-resizer/github-gist-codemirror-resizer.user.js))
 - [GitHub Notifications - Arrow key navigation](./userscripts/github-notifications-arrow-key-navigation/) ([Install](https://github.com/0xdevalias/userscripts/raw/main/userscripts/github-notifications-arrow-key-navigation/github-notifications-arrow-key-navigation.user.js))
 - [Google developer sites - Ensure ?authuser= by default](./userscripts/google-developer-sites-ensure-authuser/) ([Install](https://github.com/0xdevalias/userscripts/raw/main/userscripts/google-developer-sites-ensure-authuser/google-developer-sites-ensure-authuser.user.js))
