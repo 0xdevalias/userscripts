@@ -6,7 +6,7 @@
 // @supportURL    https://github.com/0xdevalias/userscripts/issues
 // @downloadURL   https://github.com/0xdevalias/userscripts/raw/main/userscripts/nourishd-meal-highlighter/nourishd-meal-highlighter.user.js
 // @namespace     https://www.devalias.net/
-// @version       0.1.1
+// @version       0.1.2
 // @match         https://nourishd.com.au/account
 // @grant         none
 // ==/UserScript==
@@ -22,32 +22,45 @@
   // === CONFIGURATION START ===
   // ===========================
 
+  // 'Highlight' Config
+
+  const sidesToHighlight = [
+    "Protein Bar - Blueberry",
+    "Protein Bar - Choc Sea Salt",
+    "Remedy Kombucha - Cherry Plum",
+    "Remedy Kombucha - Passionfruit",
+    "Remedy Kombucha - Raspberry Lemonade",
+    // Maybe's
+    "Berry Ripe Raw Slice",
+    "Chocolate Protein Balls",
+    "Keto Chocolate Slice",
+    "Paleo Fuel Muesli (750g)",
+    "Sticky Date Pudding (2 Serves)",
+    "Tessero Rocher Slice",
+  ];
+
   const mealsToHighlight = [
     "Beef Bolognese Gnocchi",
+    "Beef Cheek Ragu with White Potato Mash",
+    "Butter Chicken with Basmati Rice",
     "Country Style Crumbed Chicken",
     "Korean Sesame Chicken and Broccoli",
     "Kung Pao Chicken",
+    "Portuguese Chicken",
+    "Pulled Barbeque Brisket",
     "Singapore Noodles",
     "Slow Cooked Beef Stew",
     "Sweet Potato Spaghetti Bolognese",
-    // Side Dishes and Extras
-    "Protein Bar - Blueberry",
-    "Protein Bar - Choc Sea Salt",
-    "Remedy Kombucha - Passionfruit",
-    "Remedy Kombucha - Raspberry Lemonade",
+    // Maybe's
+    "Texas Brisket Chilli",
+    "Thai Green Curry",
+    "Vegetable Alfredo",
+    ...sidesToHighlight
   ];
 
-  const mealsToIgnore = [
-    "Bacon and Pumpkin Soup",
-    "Bangers and Mash",
-    "Breakky Bowl",
-    "Cauliflower 'Mac' and Cheese",
-    "Chicken Caesar Salad",
-    "Chickpea Dahl",
-    "Curried Sausage with Cauliflower Mash",
-    "Curried Sausage with White Potato Mash",
-    "Loaded Sweet Potato",
-    // Side Dishes and Extras
+  // 'Ignore' Config
+
+  const sidesToIgnore = [
     "Side Dish - Roasted Broccoli",
     "Side Dish - White Potato Mash",
     "Certified Organic Drip Bag Coffee (10 pack)",
@@ -58,6 +71,28 @@
     "Funday Sweets - Fruity Flavoured Gummy Snakes",
     "Funday Sweets - Raspberry Flavoured Gummy Frogs",
     "Gevity Rx Sweet Guts™ Salted Caramel Chocolate",
+  ];
+
+  const mealsToIgnore = [
+    "Bacon and Pumpkin Soup",
+    "Bangers and Mash",
+    "Beef Cheek Ragu with Cauliflower Mash",
+    "Breakky Bowl",
+    "Butter Chicken With Cauliflower Rice",
+    "Cauliflower 'Mac' and Cheese",
+    "Chicken Caesar Salad",
+    "Chickpea Dahl",
+    "Chilli Cheese Fries",
+    "Curried Sausage with Cauliflower Mash",
+    "Curried Sausage with White Potato Mash",
+    "Gevity Rx Fried Rice",
+    "Honey Mustard Chicken",
+    "Loaded Sweet Potato",
+    "Meatloaf",
+    "Minestrone Soup",
+    "Moroccan Baked Eggs",
+    "Satay Pork Meatballs",
+    ...sidesToIgnore,
   ];
 
   // Set to "Regular", "Large", "Extra Large" or falsy value (e.g. '') to not select any portion size by default.
