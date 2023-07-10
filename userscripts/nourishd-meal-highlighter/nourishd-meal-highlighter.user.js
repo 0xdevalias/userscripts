@@ -13,6 +13,18 @@
 
 // List all meal names: $$('div[x-show="currentTab === \'my-meals\'"] > div > div:has(> a > div.meal-slider-image) h4').map(element => element.innerText)
 
+// TODO: Add a console.log of all meals in the unknown state so we can more easily update this script with them
+//   eg.
+//     $$('div[x-show="currentTab === \'my-meals\'"] > div > div:has(> a > div.meal-slider-image) h4')
+//       .map(element => element.innerText)
+//       .filter(mealName => !mealsToHighlight.includes(mealName) && !mealsToIgnore.includes(mealName))
+
+// TODO: Can we add a 'sometimes' / 'maybe' state so we have: yes, maybe, no, unknown?
+
+// TODO: Can we also apply our highlighting choices to the 'Meal Preferences' tab?
+
+// TODO: Can we make this use what we've selected in the 'Meal Preferences' tab to configure the mealsToHighlight / mealsToIgnore rather than the hardoded arrays?
+
 (function () {
   "use strict";
 
