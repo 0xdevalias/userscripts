@@ -6,12 +6,12 @@
 // @supportURL    https://github.com/0xdevalias/userscripts/issues
 // @downloadURL   https://github.com/0xdevalias/userscripts/raw/main/userscripts/nourishd-meal-highlighter/nourishd-meal-highlighter.user.js
 // @namespace     https://www.devalias.net/
-// @version       0.1
+// @version       0.1.1
 // @match         https://nourishd.com.au/account
 // @grant         none
 // ==/UserScript==
 
-// List all meal names: $$('div[x-show="currentTab === \'my-meals\'"] > div:nth-child(3) h4').map(element => element.innerText)
+// List all meal names: $$('div[x-show="currentTab === \'my-meals\'"] > div > div:has(> a > div.meal-slider-image) h4').map(element => element.innerText)
 
 (function () {
   "use strict";
@@ -71,7 +71,7 @@
 
   const mealsContainerSelector = 'div[x-show="currentTab === \'my-meals\'"]';
   const mealTitleSelector = 'div > a > h4';
-  const mealsSelector = `div:nth-child(3) div:has(${mealTitleSelector})`;
+  const mealsSelector = 'div > div:has(> a > div.meal-slider-image)';
   const mealImageSelector = '.meal-slider-image > img, .meal-slider-image > video';
   const mealSizeQuantityAddSectionSelector = 'div:has(div > div > div > select), div:has(div > div > div > input)';
 
