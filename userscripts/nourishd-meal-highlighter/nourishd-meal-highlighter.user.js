@@ -6,7 +6,7 @@
 // @supportURL    https://github.com/0xdevalias/userscripts/issues
 // @downloadURL   https://github.com/0xdevalias/userscripts/raw/main/userscripts/nourishd-meal-highlighter/nourishd-meal-highlighter.user.js
 // @namespace     https://www.devalias.net/
-// @version       0.1.2
+// @version       0.1.3
 // @match         https://nourishd.com.au/account
 // @grant         none
 // ==/UserScript==
@@ -54,12 +54,18 @@
   const mealsToHighlight = [
     "Beef Bolognese Gnocchi",
     "Beef Cheek Ragu with White Potato Mash",
+    "Beef Stroganoff",
     "Butter Chicken with Basmati Rice",
     "Country Style Crumbed Chicken",
+    "Italian Sausage Gnocchi",
     "Korean Sesame Chicken and Broccoli",
     "Kung Pao Chicken",
+    "Off The Bone Lamb Shanks",
+    "Paleo Pumpkin Lasagna",
     "Portuguese Chicken",
+    "Primal Pad Thai",
     "Pulled Barbeque Brisket",
+    "Pulled Pork with Potato Salad",
     "Singapore Noodles",
     "Slow Cooked Beef Stew",
     "Sweet Potato Spaghetti Bolognese",
@@ -93,16 +99,26 @@
     "Butter Chicken With Cauliflower Rice",
     "Cauliflower 'Mac' and Cheese",
     "Chicken Caesar Salad",
+    "Chicken Masala with Basmati Rice",
+    "Chicken Masala with Cauliflower Rice",
+    "Chicken, Mushroom and Walnut 'Risotto'",
     "Chickpea Dahl",
     "Chilli Cheese Fries",
+    "Corned Beef with Cauliflower Mash & White Sauce",
+    "Cottage Pie",
     "Curried Sausage with Cauliflower Mash",
     "Curried Sausage with White Potato Mash",
+    "De-Constructed Shepherd's Pie",
     "Gevity Rx Fried Rice",
+    "Greek Briami",
     "Honey Mustard Chicken",
     "Loaded Sweet Potato",
+    "Meatball Marinara",
     "Meatloaf",
     "Minestrone Soup",
     "Moroccan Baked Eggs",
+    "Naked Chicken Parmi",
+    "Nasi Goreng",
     "Satay Pork Meatballs",
     ...sidesToIgnore,
   ];
