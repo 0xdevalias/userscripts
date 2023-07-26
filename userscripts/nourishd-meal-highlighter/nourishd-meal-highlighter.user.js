@@ -6,7 +6,7 @@
 // @supportURL    https://github.com/0xdevalias/userscripts/issues
 // @downloadURL   https://github.com/0xdevalias/userscripts/raw/main/userscripts/nourishd-meal-highlighter/nourishd-meal-highlighter.user.js
 // @namespace     https://www.devalias.net/
-// @version       0.1.3
+// @version       0.1.4
 // @match         https://nourishd.com.au/account
 // @grant         none
 // ==/UserScript==
@@ -95,15 +95,19 @@
     "Bacon and Pumpkin Soup",
     "Bangers and Mash",
     "Beef Cheek Ragu with Cauliflower Mash",
+    "Beef Massaman",
     "Breakky Bowl",
     "Butter Chicken With Cauliflower Rice",
     "Cauliflower 'Mac' and Cheese",
     "Chicken Caesar Salad",
+    "Chicken Korma with Basmati Rice",
+    "Chicken Korma with Cauliflower Rice",
     "Chicken Masala with Basmati Rice",
     "Chicken Masala with Cauliflower Rice",
     "Chicken, Mushroom and Walnut 'Risotto'",
     "Chickpea Dahl",
     "Chilli Cheese Fries",
+    "Chilli Con Carne",
     "Corned Beef with Cauliflower Mash & White Sauce",
     "Cottage Pie",
     "Curried Sausage with Cauliflower Mash",
