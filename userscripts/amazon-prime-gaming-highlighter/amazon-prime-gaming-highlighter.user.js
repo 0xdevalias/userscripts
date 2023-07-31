@@ -6,7 +6,7 @@
 // @supportURL    https://github.com/0xdevalias/userscripts/issues
 // @downloadURL   https://github.com/0xdevalias/userscripts/raw/main/userscripts/amazon-prime-gaming-highlighter/amazon-prime-gaming-highlighter.user.js
 // @namespace     https://www.devalias.net/
-// @version       1.0
+// @version       1.0.1
 // @match         https://gaming.amazon.com/home
 // @grant         none
 // ==/UserScript==
@@ -34,13 +34,17 @@
     "Bloons TD 6",
     "Brawlhalla",
     "BTS Island: In the SEOM",
+    "Call of Duty: Mobile",
     "Candy Crush Saga",
     "Candy Crush Soda Saga",
     "Company of Heroes 3",
     "Dead by Daylight",
     "Dead Island 2",
     "Destiny 2",
+    "Diablo IV",
     "DKO: Divine Knockout",
+    "Fallout 76",
+    "Fall Guys",
     "Farm Heroes Saga",
     "FIFA 23",
     "Genshin Impact",
@@ -64,12 +68,14 @@
     "PUBG MOBILE",
     "PUBG: BATTLEGROUNDS",
     "Realm Royale Reforged",
+    "Roblox",
     "Rogue Company",
     "Shadow Fight 3",
     "SMITE",
     "Star Trek: Timelines",
     "Teamfight Tactics",
     "The Elder Scrolls Online",
+    "Time Princess",
     "Tom Clancy's Rainbow Six Siege",
     "Total War: Warhammer II",
     "Two Point Campus",
