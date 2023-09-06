@@ -6,7 +6,7 @@
 // @supportURL    https://github.com/0xdevalias/userscripts/issues
 // @downloadURL   https://github.com/0xdevalias/userscripts/raw/main/userscripts/amazon-prime-gaming-highlighter/amazon-prime-gaming-highlighter.user.js
 // @namespace     https://www.devalias.net/
-// @version       1.0.1
+// @version       1.0.2
 // @match         https://gaming.amazon.com/home
 // @grant         none
 // ==/UserScript==
@@ -116,7 +116,7 @@
   }
 
   function getCardsInSection(section) {
-    const sectionCardsSelector = `div[data-a-target="${section}"] div.swiper-slide__child, div[data-a-target="${section}"] div.offer-list__content__grid div.tw-block`;
+    const sectionCardsSelector = `div[data-a-target="${section}"] .tw-card`;
 
     return Array.from(document.querySelectorAll(sectionCardsSelector));
   }
