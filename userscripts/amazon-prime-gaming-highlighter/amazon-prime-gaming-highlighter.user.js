@@ -28,8 +28,10 @@
   ];
 
   const gamesToIgnore = [
+    "Asphalt 9: Legends",
     "Black Desert Mobile",
     "Black Desert Online",
+    "Blade & Soul",
     "Blankos Block Party",
     "Bloons TD 6",
     "Brawlhalla",
@@ -57,6 +59,8 @@
     "Lords Mobile",
     "Lost Ark",
     "Madden NFL 23",
+    "Madden NFL 24",
+    "Mojo Melee",
     "Naraka: Bladepoint",
     "New World",
     "Overwatch 2",
@@ -68,6 +72,7 @@
     "PUBG MOBILE",
     "PUBG: BATTLEGROUNDS",
     "Realm Royale Reforged",
+    "Risk: Global Domination",
     "Roblox",
     "Rogue Company",
     "Shadow Fight 3",
@@ -89,6 +94,7 @@
   const sectionsToMatch = [
     "offer-section-DIGITAL_WEEK_GAMES",
     "offer-section-RECOMMENDED",
+    "offer-section-WEB_GAMES",
     "offer-section-TOP_PICKS",
     "offer-section-EXPIRING",
     "offer-section-FGWP",
