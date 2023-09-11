@@ -66,6 +66,7 @@
     "Primal Pad Thai",
     "Pulled Barbeque Brisket",
     "Pulled Pork with Potato Salad",
+    "Savoury Mince With Baba Ganoush",
     "Singapore Noodles",
     "Slow Cooked Beef Stew",
     "Sweet Potato Spaghetti Bolognese",
@@ -88,6 +89,7 @@
     "Take a Chill Pill - Cold Pressed Juice",
     "Funday Sweets - Fruity Flavoured Gummy Snakes",
     "Funday Sweets - Raspberry Flavoured Gummy Frogs",
+    "Funday Sweets - Sour Peach Hearts",
     "Gevity Rx Sweet Guts™ Salted Caramel Chocolate",
   ];
 
@@ -123,6 +125,7 @@
     "Moroccan Baked Eggs",
     "Naked Chicken Parmi",
     "Nasi Goreng",
+    "Pumpkin Risotto",
     "Satay Pork Meatballs",
     ...sidesToIgnore,
   ];
