@@ -6,8 +6,8 @@
 // @supportURL    https://github.com/0xdevalias/userscripts/issues
 // @downloadURL   https://github.com/0xdevalias/userscripts/raw/main/userscripts/nourishd-meal-highlighter/nourishd-meal-highlighter.user.js
 // @namespace     https://www.devalias.net/
-// @version       0.1.4
-// @match         https://nourishd.com.au/account
+// @version       0.1.5
+// @match         https://nourishd.com.au/menu
 // @grant         none
 // ==/UserScript==
 
@@ -139,9 +139,9 @@
 
   const validPortionSizes = ["Regular", "Large", "Extra Large"];
 
-  const mealsContainerSelector = 'div[x-show="currentTab === \'my-meals\'"]';
-  const mealTitleSelector = 'div > a > h4';
-  const mealsSelector = 'div > div:has(> a > div.meal-slider-image)';
+  const mealsContainerSelector = 'main .container';
+  const mealsSelector = '.product-card';
+  const mealTitleSelector = '.add-to-cart-box a';
   const mealImageSelector = '.meal-slider-image > img, .meal-slider-image > video';
   const mealSizeQuantityAddSectionSelector = 'div:has(div > div > div > select), div:has(div > div > div > input)';
 
@@ -180,7 +180,8 @@
   }
 
   function setDefaultPortionSize(meal, portionSize) {
-    const selectElement = meal.querySelector('select[name="product_variant"]');
+    const selectElement = meal.querySelector('select[wire\\:model="selectedVariantId"]');
+
     if (selectElement && portionSize) {
       const desiredOption = Array.from(selectElement.options).find((option) =>
         option.textContent.includes(portionSize)
@@ -210,46 +211,48 @@
 
       debugLog('processMeals->meals.forEach', title, { titleElement, meal });
 
-      if (!title) return;
+      if (title) {
+        if (mealsToHighlight.includes(title)) {
+          debugLog('processMeals->meals.forEach->mealsToHighlight.includes', title);
 
-      if (mealsToHighlight.includes(title)) {
-        debugLog('processMeals->meals.forEach->mealsToHighlight.includes', title);
+          styleAsHighlighted(meal);
+        } else if (mealsToIgnore.includes(title)) {
+          debugLog('processMeals->meals.forEach->mealsToIgnore.includes', title);
 
-        styleAsHighlighted(meal);
-      } else if (mealsToIgnore.includes(title)) {
-        debugLog('processMeals->meals.forEach->mealsToIgnore.includes', title);
+          styleAsIgnored(meal);
+        } else {
+          debugLog('processMeals->meals.forEach->unknown', title);
 
-        styleAsIgnored(meal);
-      } else {
-        debugLog('processMeals->meals.forEach->unknown', title);
+          styleAsUnknown(meal);
+        }
 
-        styleAsUnknown(meal);
+        // Removing the excess padding/margin below the meal image
+        // meal.classList.remove('pb-10', 'mb-10');
+        // meal.classList.add('mb-2');
+
+        // Ensure the meal title contrasts against the background
+        titleElement.classList.add("text-white");
+        // meal.classList.add("text-white");
+
+        // TODO: Re-add something here to make it reduce the size of the entire box to fit the smaller image?
+        // const mealImageElement = meal.querySelector(mealImageSelector);
+        // debugLog('mealImageElement', { mealImageElement });
+        // if (mealImageElement) {
+        //   mealImageElement.classList.remove('w-full', 'h-full');
+        //   mealImageElement.classList.add('w-1/2', 'h-1/2', 'mx-auto');
+        // }
+
+        // const sizeQuantityAddMealSection = meal.querySelector(mealSizeQuantityAddSectionSelector);
+        // debugLog('sizeQuantityAddMealSection', { sizeQuantityAddMealSection });
+        // if (sizeQuantityAddMealSection) {
+        //   // Ensure there is an even amount of left/right padding around the size/quanity/etc section
+        //   sizeQuantityAddMealSection.classList.remove("md:pl-6")
+        //   sizeQuantityAddMealSection.classList.add("px-6")
+        // }
       }
 
       // Select our desired portion size in the dropdown
       setDefaultPortionSize(meal, defaultPortionSize);
-
-      // Removing the excess padding/margin below the meal image
-      meal.classList.remove('pb-10', 'mb-10');
-      meal.classList.add('mb-2');
-
-      // Ensure the meal title contrasts against the background
-      titleElement.classList.add("text-white");
-
-      const mealImageElement = meal.querySelector(mealImageSelector);
-      debugLog('mealImageElement', { mealImageElement });
-      if (mealImageElement) {
-        mealImageElement.classList.remove('w-full', 'h-full');
-        mealImageElement.classList.add('w-1/2', 'h-1/2', 'mx-auto');
-      }
-
-      const sizeQuantityAddMealSection = meal.querySelector(mealSizeQuantityAddSectionSelector);
-      debugLog('sizeQuantityAddMealSection', { sizeQuantityAddMealSection });
-      if (sizeQuantityAddMealSection) {
-        // Ensure there is an even amount of left/right padding around the size/quanity/etc section
-        sizeQuantityAddMealSection.classList.remove("md:pl-6")
-        sizeQuantityAddMealSection.classList.add("px-6")
-      }
     });
   }
 
