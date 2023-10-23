@@ -69,15 +69,7 @@ But if you use a different browser, or have different preferences, the following
 
 ### Other's Userscripts / similar sorts of customisations
 
-Pretty much my go-to Chrome extension for making GitHub way more usable:
-
-- https://github.com/refined-github/refined-github ([Chrome](https://chrome.google.com/webstore/detail/refined-github/hlepfoohegkhhmjieoechaddaejaokhf), [Firefox](https://addons.mozilla.org/en-US/firefox/addon/refined-github-/), [Safari](https://apps.apple.com/app/id1519867270))
-  - > Browser extension that simplifies the GitHub interface and adds useful features
-
-Also a super useful Chrome extension for GitHub Notifications:
-
-- https://github.com/tanmayrajani/notifications-preview-github ([Chrome](https://chrome.google.com/webstore/detail/notifications-preview-for/kgilejfahkjidpaclkepbdoeioeohfmj), [Firefox](https://addons.mozilla.org/en-US/firefox/addon/notifications-preview-github/))
-  - > Browser Extension: preview GitHub notifications with same page pop-overs
+#### Userscripts
 
 A non-exhaustive list of userscripts created by others/from other repos/etc:
 
@@ -93,3 +85,15 @@ A non-exhaustive list of userscripts created by others/from other repos/etc:
   - > Userscripts to add functionality to miscellaneous sites
 - https://github.com/jerone/UserScripts
   - > This repo contains a few of my UserScripts that I've build since 2007.
+
+#### Chrome Extensions
+
+Pretty much my go-to Chrome extension for making GitHub way more usable:
+
+- https://github.com/refined-github/refined-github ([Chrome](https://chrome.google.com/webstore/detail/refined-github/hlepfoohegkhhmjieoechaddaejaokhf), [Firefox](https://addons.mozilla.org/en-US/firefox/addon/refined-github-/), [Safari](https://apps.apple.com/app/id1519867270))
+  - > Browser extension that simplifies the GitHub interface and adds useful features
+
+Also a super useful Chrome extension for GitHub Notifications:
+
+- https://github.com/tanmayrajani/notifications-preview-github ([Chrome](https://chrome.google.com/webstore/detail/notifications-preview-for/kgilejfahkjidpaclkepbdoeioeohfmj), [Firefox](https://addons.mozilla.org/en-US/firefox/addon/notifications-preview-github/))
+  - > Browser Extension: preview GitHub notifications with same page pop-overs
