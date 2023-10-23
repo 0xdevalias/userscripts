@@ -12,7 +12,7 @@ My user scripts to add functionality to various sites around the web (that were 
 - [Nourishd Meal Highlighter](./userscripts/nourishd-meal-highlighter/) ([Install](https://github.com/0xdevalias/userscripts/raw/main/userscripts/nourishd-meal-highlighter/nourishd-meal-highlighter.user.js))
 - [YouTube Speed Override](./userscripts/youtube-speed-override/) ([Install](https://github.com/0xdevalias/userscripts/raw/main/userscripts/youtube-speed-override/youtube-speed-override.user.js))
 
-## How to use
+### How to use
 
 Personally I use [Violentmonkey](https://violentmonkey.github.io/) in Chrome:
 
@@ -40,6 +40,16 @@ But if you use a different browser, or have different preferences, the following
 >   - Supports both GM 3 and GM 4 userscripts.
 > 
 > The most popular userscript managers are Greasemonkey, Tampermonkey, and Violentmonkey.
+
+## Devtools Snippets
+
+Chrome DevTools allows you to save small snippets of JS code [that can be easily run](https://developer.chrome.com/docs/devtools/javascript/snippets/#run) on pages using `Command + P`, typing a `!`, then selecting the snippet you want to run:
+
+- https://developer.chrome.com/docs/devtools/javascript/snippets/
+
+While I won't list them all here individually, you can find my devtools userscripts (or those I've collected from others), in:
+
+- [./devtools-snippets/](./devtools-snippets/)
 
 ## See Also
 
@@ -85,6 +95,14 @@ A non-exhaustive list of userscripts created by others/from other repos/etc:
   - > Userscripts to add functionality to miscellaneous sites
 - https://github.com/jerone/UserScripts
   - > This repo contains a few of my UserScripts that I've build since 2007.
+
+#### Devtools Snippets
+
+A non-exhaustive list of JS devtools snippets created by others/from other repos/etc:
+
+- https://github.com/bgrins/devtools-snippets
+  - > A collection of helpful snippets to use inside of browser devtools
+  - https://bgrins.github.io/devtools-snippets/
 
 #### Chrome Extensions
 
