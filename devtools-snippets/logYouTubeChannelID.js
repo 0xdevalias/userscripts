@@ -1,4 +1,4 @@
-// youtube-channel-id.js
+// logYouTubeChannelID.js
 // https://github.com/0xdevalias/userscripts/tree/main/devtools-snippets
 // Shows the ChannelID for a YouTube channel
 
