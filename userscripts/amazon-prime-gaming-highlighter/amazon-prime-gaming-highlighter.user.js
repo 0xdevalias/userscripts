@@ -6,7 +6,7 @@
 // @supportURL    https://github.com/0xdevalias/userscripts/issues
 // @downloadURL   https://github.com/0xdevalias/userscripts/raw/main/userscripts/amazon-prime-gaming-highlighter/amazon-prime-gaming-highlighter.user.js
 // @namespace     https://www.devalias.net/
-// @version       1.0.2
+// @version       1.0.3
 // @match         https://gaming.amazon.com/home
 // @grant         none
 // ==/UserScript==
@@ -117,6 +117,14 @@
     "offer-section-FGWP_FULL",
   ];
 
+  const sectionsWithTitleInHeading = [
+    "offer-section-WEB_GAMES",
+  ];
+
+  const sectionsToIgnore = [
+    "offer-section-WEB_GAMES",
+  ];
+
   function styleAsHighlighted(element) {
     element.style.backgroundColor = "green";
   }
@@ -128,12 +136,26 @@
   function styleAsIgnored(element) {
     element.style.backgroundColor = "red";
     element.style.opacity = 0.25;
+
+    // This extra background class seems to conflict/override the colour we set above.. so we remove it
+    const cardDetails = element.querySelector('.item-card-details');
+    if (cardDetails && cardDetails.classList.contains('tw-c-background-free-game')) {
+      cardDetails.classList.remove('tw-c-background-free-game');
+    }
   }
 
   function getCardsInSection(section) {
     const sectionCardsSelector = `div[data-a-target="${section}"] .tw-card`;
 
     return Array.from(document.querySelectorAll(sectionCardsSelector));
+  }
+
+  function getTitleForCard({ card, section }) {
+    if (sectionsWithTitleInHeading.includes(section)) {
+      return card.querySelector(".item-card-details .item-card-details__body .item-card-details__body__primary > [title]")?.title;
+    } else {
+      return card.querySelector(".item-card-details .item-card-details__body p > a[aria-label]")?.ariaLabel;
+    }
   }
 
   function isItemCollected(item) {
@@ -147,7 +169,7 @@
   function highlightGames() {
     sectionsToMatch.forEach((section) => {
       getCardsInSection(section).forEach((card) => {
-        const title = card.querySelector(".item-card-details__body p")?.title;
+        const title = getTitleForCard({ card, section });
 
         if (title) {
           if (gamesToHighlight.includes(title)) {
@@ -157,11 +179,14 @@
               console.log(
                 `[APGH] Highlighting section=${section} title=${title}`
               );
-          } else if (gamesToIgnore.includes(title)) {
+          } else if (gamesToIgnore.includes(title) || sectionsToIgnore.includes(section)) {
             styleAsIgnored(card);
 
             DEBUG &&
               console.log(`[APGH] Ignoring section=${section} title=${title}`);
+          } else {
+            DEBUG &&
+              console.log(`[APGH] Unhandled section=${section} title=${title}`);
           }
         }
 

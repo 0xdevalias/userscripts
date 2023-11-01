@@ -9,7 +9,7 @@
 // @supportURL    https://github.com/0xdevalias/userscripts/issues
 // @downloadURL   https://github.com/0xdevalias/userscripts/raw/main/userscripts/amazon-prime-gaming-highlighter/amazon-prime-gaming-highlighter.user.js
 // @namespace     https://www.devalias.net/
-// @version       1.0.2
+// @version       1.0.3
 // @match         https://gaming.amazon.com/home
 // @grant         none
 // ==/UserScript==
