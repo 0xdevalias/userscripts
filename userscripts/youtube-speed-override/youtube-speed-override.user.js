@@ -6,7 +6,7 @@
 // @supportURL    https://github.com/0xdevalias/userscripts/issues
 // @downloadURL   https://github.com/0xdevalias/userscripts/raw/main/userscripts/youtube-speed-override/youtube-speed-override.user.js
 // @namespace     https://www.devalias.net/
-// @version       1.1
+// @version       1.2
 // @match         https://www.youtube.com/*
 // @grant         none
 // ==/UserScript==
@@ -145,6 +145,15 @@
           // video.playbackRate = videoPlaybackRate;
           video.playbackRate -= 0.25;
         }
+
+        // Always show the notification, even when we're at our min value
+        showSpeedChangeNotification();
+      } else if (e.shiftKey && e.code === 'Space') {
+        // Don't let the default YouTube handler run
+        e.preventDefault();
+        e.stopPropagation();
+
+        video.playbackRate = 1;
 
         // Always show the notification, even when we're at our min value
         showSpeedChangeNotification();
