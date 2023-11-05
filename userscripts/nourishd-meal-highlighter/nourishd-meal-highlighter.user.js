@@ -6,7 +6,7 @@
 // @supportURL    https://github.com/0xdevalias/userscripts/issues
 // @downloadURL   https://github.com/0xdevalias/userscripts/raw/main/userscripts/nourishd-meal-highlighter/nourishd-meal-highlighter.user.js
 // @namespace     https://www.devalias.net/
-// @version       0.1.5
+// @version       0.1.6
 // @match         https://nourishd.com.au/menu
 // @grant         none
 // ==/UserScript==
@@ -43,12 +43,9 @@
     "Remedy Kombucha - Passionfruit",
     "Remedy Kombucha - Raspberry Lemonade",
     // Maybe's
-    "Berry Ripe Raw Slice",
     "Chocolate Protein Balls",
-    "Keto Chocolate Slice",
     "Paleo Fuel Muesli (750g)",
     "Sticky Date Pudding (2 Serves)",
-    "Tessero Rocher Slice",
   ];
 
   const mealsToHighlight = [
@@ -69,7 +66,8 @@
     "Savoury Mince With Baba Ganoush",
     "Singapore Noodles",
     "Slow Cooked Beef Stew",
-    "Sweet Potato Spaghetti Bolognese",
+    "Spaghetti Bolognese",
+    "TWØBAYS Brisket and Ale Stew",
     // Maybe's
     "Texas Brisket Chilli",
     "Thai Green Curry",
@@ -91,6 +89,10 @@
     "Funday Sweets - Raspberry Flavoured Gummy Frogs",
     "Funday Sweets - Sour Peach Hearts",
     "Gevity Rx Sweet Guts™ Salted Caramel Chocolate",
+    "Bounty Slice",
+    "Berry Ripe Raw Slice",
+    "Keto Chocolate Slice",
+    "Tessero Rocher Slice",
   ];
 
   const mealsToIgnore = [
