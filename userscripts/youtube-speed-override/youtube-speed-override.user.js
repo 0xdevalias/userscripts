@@ -6,7 +6,7 @@
 // @supportURL    https://github.com/0xdevalias/userscripts/issues
 // @downloadURL   https://github.com/0xdevalias/userscripts/raw/main/userscripts/youtube-speed-override/youtube-speed-override.user.js
 // @namespace     https://www.devalias.net/
-// @version       1.2
+// @version       1.3
 // @match         https://www.youtube.com/*
 // @grant         none
 // ==/UserScript==
@@ -27,6 +27,9 @@
   const settingsMenu = document.querySelector(
     '#movie_player > .ytp-settings-menu'
   );
+
+// const videoTimeDisplayCurrentSelector = '#movie_player .ytp-chrome-bottom .ytp-left-controls .ytp-time-display .ytp-time-current';
+  const videoTimeDisplayDurationSelector = '#movie_player .ytp-chrome-bottom .ytp-left-controls .ytp-time-display .ytp-time-duration';
 
   // HACK: Track this internally to prevent weird interactions with the default YouTube handler
   // let videoPlaybackRate = video.playbackRate;
@@ -117,6 +120,48 @@
     // }
   }
 
+  // Helper function to format time duration
+  function formatDuration(durationInSeconds) {
+    const hours = Math.floor(durationInSeconds / 3600);
+    const minutes = Math.floor((durationInSeconds % 3600) / 60);
+    const seconds = Math.floor(durationInSeconds % 60);
+
+    let durationString = '';
+    if (hours > 0) {
+      durationString += `${hours}:`;
+    }
+    durationString += `${(hours > 0 && minutes < 10) ? '0' : ''}${minutes}:${seconds.toString().padStart(2, '0')}`;
+
+    return durationString;
+  }
+
+//   // Function to update the current time display with the adjusted time
+//   function updateAdjustedCurrentTimeDisplay() {
+//     if (video.playbackRate === 1) return;
+
+//     const currentTimeSpan = document.querySelector(videoTimeDisplayCurrentSelector);
+
+//     if (currentTimeSpan) {
+//       const originalCurrentTime = formatDuration(video.currentTime);
+//       const adjustedCurrentTime = formatDuration(video.currentTime / video.playbackRate);
+//       currentTimeSpan.innerText = `${originalCurrentTime} (${adjustedCurrentTime} adjusted)`;
+//     }
+//   }
+
+  // Function to update the time display with the adjusted length
+  function updateAdjustedTimeDisplay() {
+    const durationSpan = document.querySelector(videoTimeDisplayDurationSelector);
+
+    if (durationSpan) {
+      // const originalCurrentTime = formatDuration(video.currentTime);
+      const adjustedCurrentTime = formatDuration(video.currentTime / video.playbackRate);
+
+      const originaDuration = formatDuration(video.duration);
+      const adjustedDuration = formatDuration(video.duration / video.playbackRate);
+      durationSpan.innerText = `${originaDuration} (${adjustedCurrentTime} / ${adjustedDuration} adjusted for ${video.playbackRate}x playback rate)`;
+    }
+  }
+
   // Override the default controls for > and <
   document.addEventListener(
     'keydown',
@@ -162,8 +207,18 @@
     { capture: true }
   );
 
-  // When the video playbackRate changes, update the playback speed in the settings menu to match our custom override
-  video.addEventListener('ratechange', updateSettingsMenu);
+  video.addEventListener('ratechange', () => {
+    // When the video playbackRate changes, update the playback speed in the settings menu to match our custom override
+    updateSettingsMenu();
+
+    // When the video playbackRate changes, update the time display
+    updateAdjustedTimeDisplay();
+  });
+
+  // Add event listener to update the time display adjusted based on playback rate
+  // video.addEventListener('timeupdate', updateAdjustedCurrentTimeDisplay);
+  video.addEventListener('durationupdate', updateAdjustedTimeDisplay);
+  video.addEventListener('timeupdate', updateAdjustedTimeDisplay);
 
   // When the settings menu changes, update the playback speed in the settings menu to match our custom override
   const settingsMenuObserver = new MutationObserver(updateSettingsMenu);
