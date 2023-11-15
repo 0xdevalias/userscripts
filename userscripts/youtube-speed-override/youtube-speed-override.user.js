@@ -6,7 +6,7 @@
 // @supportURL    https://github.com/0xdevalias/userscripts/issues
 // @downloadURL   https://github.com/0xdevalias/userscripts/raw/main/userscripts/youtube-speed-override/youtube-speed-override.user.js
 // @namespace     https://www.devalias.net/
-// @version       1.3
+// @version       1.3.1
 // @match         https://www.youtube.com/*
 // @grant         none
 // ==/UserScript==
@@ -150,6 +150,8 @@
 
   // Function to update the time display with the adjusted length
   function updateAdjustedTimeDisplay() {
+    if (video.playbackRate === 1) return;
+
     const durationSpan = document.querySelector(videoTimeDisplayDurationSelector);
 
     if (durationSpan) {
@@ -195,8 +197,12 @@
         showSpeedChangeNotification();
       } else if (e.shiftKey && e.code === 'Space') {
         // Don't let the default YouTube handler run
+        // TODO: these don't seem to actually prevent it currently, as we still seem to pause the video..?
         e.preventDefault();
         e.stopPropagation();
+
+        // TODO: not sure if this will work?
+        e.stopImmediatePropagation()
 
         video.playbackRate = 1;
 
