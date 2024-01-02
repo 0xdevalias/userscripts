@@ -9,7 +9,7 @@
 // @supportURL    https://github.com/0xdevalias/userscripts/issues
 // @downloadURL   https://github.com/0xdevalias/userscripts/raw/main/userscripts/chatgpt-web-app-script-update-notifier/chatgpt-web-app-script-update-notifier.user.js
 // @namespace     https://www.devalias.net/
-// @version       0.1-alpha
+// @version       0.2-alpha
 // @match         https://chat.openai.com/*
 // @exclude       https://chat.openai.com/auth/login
 // @grant         GM_setValue
