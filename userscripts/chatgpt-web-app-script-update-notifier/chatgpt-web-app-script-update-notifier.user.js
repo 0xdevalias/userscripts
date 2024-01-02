@@ -42,34 +42,34 @@
 (function () {
   // Function to retrieve the last saved script URLs
   function getLastScriptData() {
-    const lastData = GM_getValue('lastScriptData', []);
+    const lastData = GM_getValue("lastScriptData", []);
     return Array.isArray(lastData) ? lastData : [];
   }
 
   // Function to save the current script URLs
   function saveScriptData(scriptData) {
-    GM_setValue('lastScriptData', scriptData);
+    GM_setValue("lastScriptData", scriptData);
   }
 
   function copySavedScriptURLsToClipboard() {
     const lastData = getLastScriptData();
-    const lastUrls = lastData.map(entry => entry.url);
+    const lastUrls = lastData.map((entry) => entry.url);
 
     if (!Array.isArray(lastUrls) || lastUrls.length === 0) {
       GM_notification({
-        title: 'No saved ChatGPT script URLs to copy to clipboard',
-        text: 'There were no saved ChatGPT script URLs to be copied to the clipboard',
+        title: "No saved ChatGPT script URLs to copy to clipboard",
+        text: "There were no saved ChatGPT script URLs to be copied to the clipboard",
         timeout: 5000,
       });
 
-      return
+      return;
     }
 
-    GM_setClipboard(lastUrls.join('\n'), 'text/plain');
+    GM_setClipboard(lastUrls.join("\n"), "text/plain");
 
     GM_notification({
-      title: 'ChatGPT script URLs copied to clipboard',
-      text: 'The saved ChatGPT script URLs were copied to the clipboard',
+      title: "ChatGPT script URLs copied to clipboard",
+      text: "The saved ChatGPT script URLs were copied to the clipboard",
       timeout: 5000,
     });
   }
@@ -79,8 +79,8 @@
 
     if (!Array.isArray(lastData) || lastData.length === 0) {
       GM_notification({
-        title: 'No saved ChatGPT script data to copy to clipboard',
-        text: 'There was no saved ChatGPT script data to be copied to the clipboard',
+        title: "No saved ChatGPT script data to copy to clipboard",
+        text: "There was no saved ChatGPT script data to be copied to the clipboard",
         timeout: 5000,
       });
 
@@ -88,21 +88,21 @@
     }
 
     const dataStr = JSON.stringify(lastData, null, 2);
-    GM_setClipboard(dataStr, 'text/plain');
+    GM_setClipboard(dataStr, "text/plain");
 
     GM_notification({
-      title: 'ChatGPT script data copied to clipboard',
-      text: 'The saved ChatGPT script data were copied to the clipboard',
+      title: "ChatGPT script data copied to clipboard",
+      text: "The saved ChatGPT script data were copied to the clipboard",
       timeout: 5000,
     });
   }
 
   function clearSavedScriptData() {
-    GM_deleteValue('lastScriptData');
+    GM_deleteValue("lastScriptData");
 
     GM_notification({
-      title: 'Saved ChatGPT script data cleared',
-      text: 'The saved ChatGPT script data was cleared from storage',
+      title: "Saved ChatGPT script data cleared",
+      text: "The saved ChatGPT script data was cleared from storage",
       timeout: 5000,
     });
   }
@@ -128,26 +128,32 @@
 
     // Convert the Map back to an array and sort it first by date (oldest first), then by URL alphabetically,
     // while keeping URLs containing _ssgManifest.js or _buildManifest.js after all others.
-    const sortedData = Array.from(dataMap, ([url, date]) => ({ url, date }))
-      .sort((a, b) => {
-        const dateComparison = new Date(a.date) - new Date(b.date);
+    const sortedData = Array.from(dataMap, ([url, date]) => ({
+      url,
+      date,
+    })).sort((a, b) => {
+      const dateComparison = new Date(a.date) - new Date(b.date);
 
-        // If the dates are equal, compare URLs
-        if (dateComparison === 0) {
-          const aIsSpecial = a.url.includes('_ssgManifest.js') || a.url.includes('_buildManifest.js');
-          const bIsSpecial = b.url.includes('_ssgManifest.js') || b.url.includes('_buildManifest.js');
+      // If the dates are equal, compare URLs
+      if (dateComparison === 0) {
+        const aIsSpecial =
+          a.url.includes("_ssgManifest.js") ||
+          a.url.includes("_buildManifest.js");
+        const bIsSpecial =
+          b.url.includes("_ssgManifest.js") ||
+          b.url.includes("_buildManifest.js");
 
-          if (aIsSpecial && !bIsSpecial) {
-            return 1; // a should come after b
-          } else if (!aIsSpecial && bIsSpecial) {
-            return -1; // a should come before b
-          } else {
-            return a.url.localeCompare(b.url);
-          }
+        if (aIsSpecial && !bIsSpecial) {
+          return 1; // a should come after b
+        } else if (!aIsSpecial && bIsSpecial) {
+          return -1; // a should come before b
+        } else {
+          return a.url.localeCompare(b.url);
         }
+      }
 
-        return dateComparison;
-      });
+      return dateComparison;
+    });
 
     return sortedData;
   }
@@ -164,39 +170,53 @@
 
     // Send notification
     GM_notification({
-      title: 'Saved ChatGPT script data cleaned',
-      text: 'The saved ChatGPT script data was deduplicated and sorted successfully.',
+      title: "Saved ChatGPT script data cleaned",
+      text: "The saved ChatGPT script data was deduplicated and sorted successfully.",
       timeout: 5000,
     });
   }
 
-  GM_registerMenuCommand('Copy ChatGPT script URLs to clipboard', copySavedScriptURLsToClipboard);
+  GM_registerMenuCommand(
+    "Copy ChatGPT script URLs to clipboard",
+    copySavedScriptURLsToClipboard,
+  );
 
-  GM_registerMenuCommand('Copy ChatGPT script data to clipboard', copySavedScriptDataToClipboard);
+  GM_registerMenuCommand(
+    "Copy ChatGPT script data to clipboard",
+    copySavedScriptDataToClipboard,
+  );
 
-  GM_registerMenuCommand('Clear saved script data', clearSavedScriptData);
+  GM_registerMenuCommand("Clear saved script data", clearSavedScriptData);
 
-  GM_registerMenuCommand('Clean (deduplicate/sort) saved script data', cleanExistingSavedData);
+  GM_registerMenuCommand(
+    "Clean (deduplicate/sort) saved script data",
+    cleanExistingSavedData,
+  );
 
   // Listen for changes to the saved script URLs
   // TODO: i'm not sure if this is actually working properly at the moment..
-  GM_addValueChangeListener('lastScriptURLs', (name, oldValue, newValue, remote) => {
-    // Ignore changes from remote scripts
-    if (remote) return;
+  GM_addValueChangeListener(
+    "lastScriptURLs",
+    (name, oldValue, newValue, remote) => {
+      // Ignore changes from remote scripts
+      if (remote) return;
 
-    // Compare the new script URLs with the previous saved ones
-    const updatedURLs = newValue.filter((url) => !oldValue.includes(url));
+      // Compare the new script URLs with the previous saved ones
+      const updatedURLs = newValue.filter((url) => !oldValue.includes(url));
 
-    // If there are updated URLs, send a notification
-    if (updatedURLs.length > 0) {
-      console.log('SHOW URLS CHANGED NOTIFICATION 2');
-      GM_notification({
-        title: 'Script URL Update',
-        text: `The following script URLs have been updated:\n${updatedURLs.join('\n')}`,
-        timeout: 5000,
-      });
-    }
-  });
+      // If there are updated URLs, send a notification
+      if (updatedURLs.length > 0) {
+        console.log("SHOW URLS CHANGED NOTIFICATION 2");
+        GM_notification({
+          title: "Script URL Update",
+          text: `The following script URLs have been updated:\n${updatedURLs.join(
+            "\n",
+          )}`,
+          timeout: 5000,
+        });
+      }
+    },
+  );
 
   // Extract all script URLs from the head of the page and decode them
   const scriptURLs = Array.from(
@@ -210,7 +230,7 @@
   const lastScriptData = getLastScriptData();
 
   // Create a Set of the last saved URLs
-  const lastScriptURLs = new Set(lastScriptData.map(entry => entry.url));
+  const lastScriptURLs = new Set(lastScriptData.map((entry) => entry.url));
 
   // Find the changed URLs (new URLs that are not in the last saved URLs)
   const changedURLs = scriptURLs.filter((url) => !lastScriptURLs.has(url));
@@ -229,10 +249,12 @@
 
   // Notify the user if there are changed URLs
   if (changedURLs.length > 0) {
-    console.log('SHOW URLS CHANGED NOTIFICATION 1');
+    console.log("SHOW URLS CHANGED NOTIFICATION 1");
     GM_notification({
-      title: 'Script URL Change',
-      text: `The following script URLs have changed:\n${changedURLs.join('\n')}`,
+      title: "Script URL Change",
+      text: `The following script URLs have changed:\n${changedURLs.join(
+        "\n",
+      )}`,
       timeout: 5000,
     });
   }
