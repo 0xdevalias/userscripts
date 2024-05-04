@@ -6,7 +6,8 @@
 // @supportURL    https://github.com/0xdevalias/userscripts/issues
 // @downloadURL   https://github.com/0xdevalias/userscripts/raw/main/userscripts/chatgpt-web-app-script-update-notifier/chatgpt-web-app-script-update-notifier.user.js
 // @namespace     https://www.devalias.net/
-// @version       0.2-alpha
+// @version       0.3-alpha
+// @match         https://chatgpt.com/*
 // @match         https://chat.openai.com/*
 // @exclude       https://chat.openai.com/auth/login
 // @grant         GM_setValue
@@ -40,6 +41,14 @@
 // TODO: ChatGPT - Code Deepdive - 20230614: https://docs.google.com/document/d/1oVi4zLWHaq8AUN6HJSYxnotVpztZEZsbT_Cd82wUB20/edit#heading=h.pz5pe0bnth8j
 
 (function () {
+  let DEBUG = false;
+
+  const allowedScriptURLs = [
+    "https://cdn.oaistatic.com/",
+    "https://chatgpt.com/",
+    "https://chat.openai.com/",
+  ];
+
   // Function to retrieve the last saved script URLs
   function getLastScriptData() {
     const lastData = GM_getValue("lastScriptData", []);
@@ -218,18 +227,15 @@
     },
   );
 
-  // Extract all script URLs from the head of the page and decode them
+  // Extract all script URLs from the head of the page, decode them, and filter them
   const scriptURLs = Array.from(
     document.head.getElementsByTagName("script"),
     (element) => decodeURIComponent(element.src),
-  ).filter(
-    (url) =>
-      url !== "" &&
-      (url.startsWith("https://chat.openai.com/") ||
-        url.startsWith("https://cdn.oaistatic.com/")),
+  ).filter((url) =>
+    allowedURLs.some((allowedURL) => url.startsWith(allowedURL)),
   );
 
-  // console.log('scriptURLs', scriptURLs);
+  DEBUG && console.log('scriptURLs', scriptURLs);
 
   // Retrieve the last saved script data
   const lastScriptData = getLastScriptData();
@@ -254,7 +260,6 @@
 
   // Notify the user if there are changed URLs
   if (changedURLs.length > 0) {
-    console.log("SHOW URLS CHANGED NOTIFICATION 1");
     GM_notification({
       title: "Script URL Change",
       text: `The following script URLs have changed:\n${changedURLs.join(
