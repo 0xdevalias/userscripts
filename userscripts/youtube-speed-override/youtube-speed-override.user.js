@@ -20,27 +20,28 @@
 
   // Get the video element
   const video = document.querySelector(
-    '#movie_player > .html5-video-container > video.html5-main-video'
+    '#movie_player > .html5-video-container > video.html5-main-video',
   );
 
   // Get the settings menu element
   const settingsMenu = document.querySelector(
-    '#movie_player > .ytp-settings-menu'
+    '#movie_player > .ytp-settings-menu',
   );
 
-// const videoTimeDisplayCurrentSelector = '#movie_player .ytp-chrome-bottom .ytp-left-controls .ytp-time-display .ytp-time-current';
-  const videoTimeDisplayDurationSelector = '#movie_player .ytp-chrome-bottom .ytp-left-controls .ytp-time-display .ytp-time-duration';
+  // const videoTimeDisplayCurrentSelector = '#movie_player .ytp-chrome-bottom .ytp-left-controls .ytp-time-display .ytp-time-current';
+  const videoTimeDisplayDurationSelector =
+    '#movie_player .ytp-chrome-bottom .ytp-left-controls .ytp-time-display .ytp-time-duration';
 
   // HACK: Track this internally to prevent weird interactions with the default YouTube handler
   // let videoPlaybackRate = video.playbackRate;
 
   function showSpeedChangeNotification() {
     const bezelContainer = document.querySelector(
-      '#movie_player div:has(> .ytp-bezel-text-wrapper)'
+      '#movie_player div:has(> .ytp-bezel-text-wrapper)',
     );
 
     const bezelText = bezelContainer.querySelector(
-      '.ytp-bezel-text-wrapper > .ytp-bezel-text'
+      '.ytp-bezel-text-wrapper > .ytp-bezel-text',
     );
 
     const bezelIconContainer = bezelContainer.querySelector('.ytp-bezel');
@@ -62,11 +63,11 @@
     const settingsPanel = settingsMenu.querySelector('.ytp-panel');
 
     const settingsPanelTitle = settingsPanel.querySelector(
-      '.ytp-panel-header > .ytp-panel-title'
+      '.ytp-panel-header > .ytp-panel-title',
     );
 
     const settingsPanelMenuItems = settingsPanel.querySelectorAll(
-      '.ytp-panel-menu > .ytp-menuitem'
+      '.ytp-panel-menu > .ytp-menuitem',
     );
 
     DEBUG &&
@@ -85,7 +86,7 @@
           if (content.innerText !== String(video.playbackRate)) {
             DEBUG &&
               console.log(
-                `content was "${content.innerText}", setting to "${video.playbackRate}"`
+                `content was "${content.innerText}", setting to "${video.playbackRate}"`,
               );
 
             // Update the content with the current playback speed
@@ -130,36 +131,44 @@
     if (hours > 0) {
       durationString += `${hours}:`;
     }
-    durationString += `${(hours > 0 && minutes < 10) ? '0' : ''}${minutes}:${seconds.toString().padStart(2, '0')}`;
+    durationString += `${
+      hours > 0 && minutes < 10 ? '0' : ''
+    }${minutes}:${seconds.toString().padStart(2, '0')}`;
 
     return durationString;
   }
 
-//   // Function to update the current time display with the adjusted time
-//   function updateAdjustedCurrentTimeDisplay() {
-//     if (video.playbackRate === 1) return;
+  //   // Function to update the current time display with the adjusted time
+  //   function updateAdjustedCurrentTimeDisplay() {
+  //     if (video.playbackRate === 1) return;
 
-//     const currentTimeSpan = document.querySelector(videoTimeDisplayCurrentSelector);
+  //     const currentTimeSpan = document.querySelector(videoTimeDisplayCurrentSelector);
 
-//     if (currentTimeSpan) {
-//       const originalCurrentTime = formatDuration(video.currentTime);
-//       const adjustedCurrentTime = formatDuration(video.currentTime / video.playbackRate);
-//       currentTimeSpan.innerText = `${originalCurrentTime} (${adjustedCurrentTime} adjusted)`;
-//     }
-//   }
+  //     if (currentTimeSpan) {
+  //       const originalCurrentTime = formatDuration(video.currentTime);
+  //       const adjustedCurrentTime = formatDuration(video.currentTime / video.playbackRate);
+  //       currentTimeSpan.innerText = `${originalCurrentTime} (${adjustedCurrentTime} adjusted)`;
+  //     }
+  //   }
 
   // Function to update the time display with the adjusted length
   function updateAdjustedTimeDisplay() {
     if (video.playbackRate === 1) return;
 
-    const durationSpan = document.querySelector(videoTimeDisplayDurationSelector);
+    const durationSpan = document.querySelector(
+      videoTimeDisplayDurationSelector,
+    );
 
     if (durationSpan) {
       // const originalCurrentTime = formatDuration(video.currentTime);
-      const adjustedCurrentTime = formatDuration(video.currentTime / video.playbackRate);
+      const adjustedCurrentTime = formatDuration(
+        video.currentTime / video.playbackRate,
+      );
 
       const originaDuration = formatDuration(video.duration);
-      const adjustedDuration = formatDuration(video.duration / video.playbackRate);
+      const adjustedDuration = formatDuration(
+        video.duration / video.playbackRate,
+      );
       durationSpan.innerText = `${originaDuration} (${adjustedCurrentTime} / ${adjustedDuration} adjusted for ${video.playbackRate}x playback rate)`;
     }
   }
@@ -202,7 +211,7 @@
         e.stopPropagation();
 
         // TODO: not sure if this will work?
-        e.stopImmediatePropagation()
+        e.stopImmediatePropagation();
 
         video.playbackRate = 1;
 
@@ -210,7 +219,7 @@
         showSpeedChangeNotification();
       }
     },
-    { capture: true }
+    { capture: true },
   );
 
   video.addEventListener('ratechange', () => {
