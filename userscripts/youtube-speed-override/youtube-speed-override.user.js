@@ -6,25 +6,46 @@
 // @supportURL    https://github.com/0xdevalias/userscripts/issues
 // @downloadURL   https://github.com/0xdevalias/userscripts/raw/main/userscripts/youtube-speed-override/youtube-speed-override.user.js
 // @namespace     https://www.devalias.net/
-// @version       1.3.1
+// @version       1.4
 // @match         https://www.youtube.com/*
 // @grant         none
 // ==/UserScript==
 
 // TODO: Explore if we want to use any of the GM_* APIs: https://violentmonkey.github.io/api/gm/
 
-(function () {
+(async function () {
   'use strict';
 
   const DEBUG = false;
 
+  function waitForElement(selector) {
+    return new Promise((resolve) => {
+      const element = document.querySelector(selector);
+      if (element) {
+        resolve(element);
+      } else {
+        const observer = new MutationObserver((mutations, obs) => {
+          const element = document.querySelector(selector);
+          if (element) {
+            obs.disconnect();
+            resolve(element);
+          }
+        });
+        observer.observe(document, {
+          childList: true,
+          subtree: true,
+        });
+      }
+    });
+  }
+
   // Get the video element
-  const video = document.querySelector(
+  const video = await waitForElement(
     '#movie_player > .html5-video-container > video.html5-main-video',
   );
 
   // Get the settings menu element
-  const settingsMenu = document.querySelector(
+  const settingsMenu = await waitForElement(
     '#movie_player > .ytp-settings-menu',
   );
 

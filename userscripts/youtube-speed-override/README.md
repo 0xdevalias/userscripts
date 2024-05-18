@@ -9,7 +9,7 @@
 // @supportURL    https://github.com/0xdevalias/userscripts/issues
 // @downloadURL   https://github.com/0xdevalias/userscripts/raw/main/userscripts/youtube-speed-override/youtube-speed-override.user.js
 // @namespace     https://www.devalias.net/
-// @version       1.3.1
+// @version       1.4
 // @match         https://www.youtube.com/*
 // @grant         none
 // ==/UserScript==
