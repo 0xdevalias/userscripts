@@ -6,7 +6,7 @@
 // @supportURL    https://github.com/0xdevalias/userscripts/issues
 // @downloadURL   https://github.com/0xdevalias/userscripts/raw/main/userscripts/nourishd-meal-highlighter/nourishd-meal-highlighter.user.js
 // @namespace     https://www.devalias.net/
-// @version       0.1.7
+// @version       0.1.8
 // @match         https://nourishd.com.au/menu
 // @grant         GM_registerMenuCommand
 // ==/UserScript==
@@ -148,6 +148,7 @@
 
   const mealsContainerSelector = 'main .container > div > div:nth-child(2)';
   const mealsSelector = '.product-card';
+  const addToCartBoxGrey = '.add-to-cart-box .text-primary-graylight';
   const mealTitleSelector = '.add-to-cart-box a';
   const mealImageSelector =
     '.meal-slider-image > img, .meal-slider-image > video';
@@ -257,6 +258,12 @@
       const titleElement = meal.querySelector(mealTitleSelector);
       const title = titleElement?.textContent.trim() ?? '';
 
+      // Ensure the meal title/price contrasts against the background
+      meal.querySelectorAll(addToCartBoxGrey).forEach((element) => {
+        element.classList.remove('text-primary-graylight');
+        element.classList.add('text-white');
+      });
+
       debugLog('processMeals->meals.forEach', title, { titleElement, meal });
 
       if (title) {
@@ -283,10 +290,6 @@
         // Removing the excess padding/margin below the meal image
         // meal.classList.remove('pb-10', 'mb-10');
         // meal.classList.add('mb-2');
-
-        // Ensure the meal title contrasts against the background
-        titleElement.classList.add('text-white');
-        // meal.classList.add("text-white");
 
         // TODO: Re-add something here to make it reduce the size of the entire box to fit the smaller image?
         // const mealImageElement = meal.querySelector(mealImageSelector);
