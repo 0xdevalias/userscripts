@@ -6,18 +6,10 @@
 // @supportURL    https://github.com/0xdevalias/userscripts/issues
 // @downloadURL   https://github.com/0xdevalias/userscripts/raw/main/userscripts/nourishd-meal-highlighter/nourishd-meal-highlighter.user.js
 // @namespace     https://www.devalias.net/
-// @version       0.1.6
+// @version       0.1.7
 // @match         https://nourishd.com.au/menu
-// @grant         none
+// @grant         GM_registerMenuCommand
 // ==/UserScript==
-
-// List all meal names: $$('div[x-show="currentTab === \'my-meals\'"] > div > div:has(> a > div.meal-slider-image) h4').map(element => element.innerText)
-
-// TODO: Add a console.log of all meals in the unknown state so we can more easily update this script with them
-//   eg.
-//     $$('div[x-show="currentTab === \'my-meals\'"] > div > div:has(> a > div.meal-slider-image) h4')
-//       .map(element => element.innerText)
-//       .filter(mealName => !mealsToHighlight.includes(mealName) && !mealsToIgnore.includes(mealName))
 
 // TODO: Can we add a 'sometimes' / 'maybe' state so we have: yes, maybe, no, unknown?
 
@@ -154,7 +146,7 @@
 
   const validPortionSizes = ['Regular', 'Large', 'Extra Large'];
 
-  const mealsContainerSelector = 'main .container';
+  const mealsContainerSelector = 'main .container > div > div:nth-child(2)';
   const mealsSelector = '.product-card';
   const mealTitleSelector = '.add-to-cart-box a';
   const mealImageSelector =
@@ -183,6 +175,30 @@
       )}" are in both mealsToHighlight and mealsToIgnore arrays.`,
     );
   }
+
+  function getMealTitles() {
+    return Array.from(
+      document.querySelectorAll(
+        `${mealsContainerSelector} ${mealsSelector} ${mealTitleSelector}`,
+      ),
+    ).map((element) => element.innerText.trim());
+  }
+
+  GM_registerMenuCommand('[DEBUG] console.log meal titles', () => {
+    const mealTitles = getMealTitles();
+
+    console.log(`Meals:\n${mealTitles.join('\n')}`);
+  });
+
+  GM_registerMenuCommand('[DEBUG] console.log unknown meals', () => {
+    const unknownMeals = getMealTitles().filter(
+      (mealName) =>
+        !mealsToHighlight.includes(mealName) &&
+        !mealsToIgnore.includes(mealName),
+    );
+
+    console.log(`Unknown Meals:\n${unknownMeals.join('\n')}`);
+  });
 
   function debugLog(...logContents) {
     if (!DEBUG) return;
