@@ -17,6 +17,11 @@
 
 // TODO: Can we make this use what we've selected in the 'Meal Preferences' tab to configure the mealsToHighlight / mealsToIgnore rather than the hardoded arrays?
 
+// TODO: Explore using GM_config
+//   https://wiki.greasespot.net/GM_config
+//   https://github.com/sizzlemctwizzle/GM_config/
+//   https://github.com/sizzlemctwizzle/GM_config/wiki
+
 (function () {
   'use strict';
 
