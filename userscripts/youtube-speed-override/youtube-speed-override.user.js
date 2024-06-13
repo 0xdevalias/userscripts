@@ -6,9 +6,11 @@
 // @supportURL    https://github.com/0xdevalias/userscripts/issues
 // @downloadURL   https://github.com/0xdevalias/userscripts/raw/main/userscripts/youtube-speed-override/youtube-speed-override.user.js
 // @namespace     https://www.devalias.net/
-// @version       1.4
+// @version       1.5
 // @match         https://www.youtube.com/*
-// @grant         none
+// @grant         GM_getValue
+// @grant         GM_setValue
+// @grant         GM_registerMenuCommand
 // ==/UserScript==
 
 // TODO: Explore if we want to use any of the GM_* APIs: https://violentmonkey.github.io/api/gm/
@@ -16,7 +18,35 @@
 (async function () {
   'use strict';
 
-  const DEBUG = false;
+  const LOG_PREFIX = '[userscript::youtube-speed-override]';
+  let DEBUG = GM_getValue('isDebugEnabled', false);
+
+  function debugLog(...args) {
+    if (!DEBUG) return
+
+    console.log(LOG_PREFIX, ...args);
+  }
+
+  function registerOrUpdateDebugMenuItem() {
+    GM_registerMenuCommand(
+      `Toggle Debug Mode (currently ${DEBUG ? 'ON' : 'OFF'})`,
+      toggleDebug,
+      { id: 'debugToggle' }
+    );
+
+    console.log(LOG_PREFIX, `Debug mode is now ${DEBUG ? 'ON' : 'OFF'}`);
+  }
+
+  function toggleDebug() {
+    // First read the current value from the store to handle any misaligned local state
+    const previousDebug = GM_getValue('isDebugEnabled', false);
+
+    DEBUG = !previousDebug;
+    GM_setValue('isDebugEnabled', DEBUG);
+
+    // Update the menu item text
+    registerOrUpdateDebugMenuItem();
+  }
 
   function waitForElement(selector) {
     return new Promise((resolve) => {
@@ -38,6 +68,9 @@
       }
     });
   }
+
+  // Register the initial menu item
+  registerOrUpdateDebugMenuItem();
 
   // Get the video element
   const video = await waitForElement(
@@ -91,12 +124,11 @@
       '.ytp-panel-menu > .ytp-menuitem',
     );
 
-    DEBUG &&
-      console.log('[updateSettingsMenu]', {
-        settingsPanel,
-        settingsPanelTitle,
-        settingsPanelMenuItems,
-      });
+    debugLog('[updateSettingsMenu]', {
+      settingsPanel,
+      settingsPanelTitle,
+      settingsPanelMenuItems,
+    });
 
     if (settingsPanelTitle === null) {
       for (const menuItem of settingsPanelMenuItems) {
@@ -105,10 +137,9 @@
 
         if (label && label.innerText === 'Playback speed') {
           if (content.innerText !== String(video.playbackRate)) {
-            DEBUG &&
-              console.log(
-                `content was "${content.innerText}", setting to "${video.playbackRate}"`,
-              );
+            debugLog(
+              `content was "${content.innerText}", setting to "${video.playbackRate}"`,
+            );
 
             // Update the content with the current playback speed
             content.innerText = video.playbackRate;
@@ -131,10 +162,9 @@
     //   const newLabel = `Custom (${video.playbackRate})`;
 
     //   if (customSpeedMenuItemLabel.innerText !== newLabel) {
-    //     DEBUG &&
-    //       console.log(
-    //         `customSpeedMenuItemLabel was "${customSpeedMenuItemLabel.innerText}", setting to "${newLabel}"`
-    //       );
+    //     debugLog(
+    //       `customSpeedMenuItemLabel was "${customSpeedMenuItemLabel.innerText}", setting to "${newLabel}"`
+    //     );
 
     //     // Update the content with the current playback speed
     //     customSpeedMenuItemLabel.innerText = newLabel;
