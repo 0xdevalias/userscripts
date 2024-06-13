@@ -1,12 +1,12 @@
 // ==UserScript==
 // @name          YouTube Speed Override
-// @description   Override the default youtube controls for > and <
+// @description   Override the default youtube controls for > and < and show remaining time when Option key is held
 // @author        Glenn 'devalias' Grant (devalias.net)
 // @homepageURL   https://github.com/0xdevalias/userscripts
 // @supportURL    https://github.com/0xdevalias/userscripts/issues
 // @downloadURL   https://github.com/0xdevalias/userscripts/raw/main/userscripts/youtube-speed-override/youtube-speed-override.user.js
 // @namespace     https://www.devalias.net/
-// @version       1.5
+// @version       1.6
 // @match         https://www.youtube.com/*
 // @grant         GM_getValue
 // @grant         GM_setValue
@@ -19,12 +19,14 @@
   'use strict';
 
   const LOG_PREFIX = '[userscript::youtube-speed-override]';
+
   let DEBUG = GM_getValue('isDebugEnabled', false);
+  let isAltKeyPressed = false;
 
   function debugLog(...args) {
     if (!DEBUG) return
 
-    console.log(LOG_PREFIX, ...args);
+    console.log(LOG_PREFIX, ...args, { DEBUG, isAltKeyPressed });
   }
 
   function registerOrUpdateDebugMenuItem() {
@@ -85,6 +87,8 @@
   // const videoTimeDisplayCurrentSelector = '#movie_player .ytp-chrome-bottom .ytp-left-controls .ytp-time-display .ytp-time-current';
   const videoTimeDisplayDurationSelector =
     '#movie_player .ytp-chrome-bottom .ytp-left-controls .ytp-time-display .ytp-time-duration';
+
+    const durationSpan = await waitForElement('#movie_player .ytp-chrome-bottom .ytp-left-controls .ytp-time-display .ytp-time-duration');
 
   // HACK: Track this internally to prevent weird interactions with the default YouTube handler
   // let videoPlaybackRate = video.playbackRate;
@@ -204,23 +208,35 @@
 
   // Function to update the time display with the adjusted length
   function updateAdjustedTimeDisplay() {
-    if (video.playbackRate === 1) return;
+    if (!video.duration) return
 
-    const durationSpan = document.querySelector(
-      videoTimeDisplayDurationSelector,
+    // const originalCurrentTime = formatDuration(video.currentTime);
+    const originalDuration = formatDuration(video.duration);
+
+    // If rate is 1x, only update if alt/option key is pressed, otherwise reset to default
+    if (!isAltKeyPressed && video.playbackRate === 1) {
+      // Avoid updating if it's already the same content (might prevent some mutation handlers from triggering?)
+      if (durationSpan.innerText === originalDuration) return
+
+      durationSpan.innerText = originalDuration
+      return;
+    }
+
+    const adjustedCurrentTime = formatDuration(
+      video.currentTime / video.playbackRate,
+    );
+    const adjustedDuration = formatDuration(
+      video.duration / video.playbackRate,
     );
 
-    if (durationSpan) {
-      // const originalCurrentTime = formatDuration(video.currentTime);
-      const adjustedCurrentTime = formatDuration(
-        video.currentTime / video.playbackRate,
-      );
+    if (!isAltKeyPressed) {
+      durationSpan.innerText = `${originalDuration} (${adjustedCurrentTime} / ${adjustedDuration} adjusted for ${video.playbackRate}x playback rate)`;
+    } else {
+      const remainingTime = video.duration - video.currentTime;
+      const adjustedRemainingTime = formatDuration(remainingTime / video.playbackRate);
+      const percentageComplete = ((video.currentTime / video.duration) * 100).toFixed(2);
 
-      const originaDuration = formatDuration(video.duration);
-      const adjustedDuration = formatDuration(
-        video.duration / video.playbackRate,
-      );
-      durationSpan.innerText = `${originaDuration} (${adjustedCurrentTime} / ${adjustedDuration} adjusted for ${video.playbackRate}x playback rate)`;
+      durationSpan.innerText = `${originalDuration} (${adjustedRemainingTime} remaining / ${percentageComplete}% complete; adjusted for ${video.playbackRate}x playback rate)`;
     }
   }
 
@@ -228,6 +244,12 @@
   document.addEventListener(
     'keydown',
     (e) => {
+      debugLog(`keydown event: ${e.key}`)
+
+      if (e.altKey) {
+        isAltKeyPressed = true;
+      }
+
       // TODO: I think this still doesn't properly prevent the default YouTube code from running, so sometimes we increase by more than 0.25
       //   This might be fixed since I added capture: true
       if (e.key === '>') {
@@ -268,6 +290,18 @@
 
         // Always show the notification, even when we're at our min value
         showSpeedChangeNotification();
+      }
+    },
+    { capture: true },
+  );
+
+  document.addEventListener(
+    'keyup',
+    (e) => {
+      debugLog(`keyup event: ${e.key}`)
+
+      if (!e.altKey) {
+        isAltKeyPressed = false;
       }
     },
     { capture: true },
