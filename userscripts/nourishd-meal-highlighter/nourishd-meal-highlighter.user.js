@@ -6,7 +6,7 @@
 // @supportURL    https://github.com/0xdevalias/userscripts/issues
 // @downloadURL   https://github.com/0xdevalias/userscripts/raw/main/userscripts/nourishd-meal-highlighter/nourishd-meal-highlighter.user.js
 // @namespace     https://www.devalias.net/
-// @version       0.1.9
+// @version       0.1.10
 // @match         https://nourishd.com.au/menu
 // @grant         GM_registerMenuCommand
 // ==/UserScript==
@@ -152,23 +152,20 @@
     ...sidesToIgnore,
   ];
 
-  // Set to "Regular", "Large", "Extra Large" or falsy value (e.g. '') to not select any portion size by default.
-  const defaultPortionSize = 'Extra Large';
+  // Set to "R", "L", "XL" or falsy value (e.g. '') to not select any portion size by default.
+  const defaultPortionSize = 'XL';
 
   // =========================
   // === CONFIGURATION END ===
   // =========================
 
-  const validPortionSizes = ['Regular', 'Large', 'Extra Large'];
+  const validPortionSizes = ['R', 'L', 'XL'];
 
   const mealsContainerSelector = 'main .container > div > div:nth-child(2)';
-  const mealsSelector = '.product-card';
-  const addToCartBoxGrey = '.add-to-cart-box .text-primary-graylight';
-  const mealTitleSelector = '.add-to-cart-box a';
+  const mealsSelector = '[x-data="{ sizeGuide: false }"] > div';
+  const mealTitleSelector = '.text-secondary > h3 > a';
   const mealImageSelector =
     '.meal-slider-image > img, .meal-slider-image > video';
-  const mealSizeQuantityAddSectionSelector =
-    'div:has(div > div > div > select), div:has(div > div > div > input)';
 
   // Check if defaultPortionSize is set to a valid option
   if (defaultPortionSize && !validPortionSizes.includes(defaultPortionSize)) {
@@ -239,19 +236,26 @@
   }
 
   function setDefaultPortionSize(meal, portionSize) {
-    const selectElement = meal.querySelector(
-      'div[x-show="showAddToCart"] select[x-on\\:change="updateSelectedVariantQuantity($event.target.value)"]',
+    if (meal.dataset.portionSizeSet === 'true') return;
+
+    const labelElements = meal.querySelectorAll(
+      'div.items-center > label.meal-size-btn:has(input[name="meal-size"])',
     );
 
-    if (selectElement && portionSize) {
-      const desiredOption = Array.from(selectElement.options).find((option) =>
-        option.textContent.includes(portionSize),
-      );
-      if (desiredOption) {
-        selectElement.value = desiredOption.value;
+    const matchingLabel = Array.from(labelElements).find((label) =>
+      label.querySelector('span').textContent.trim().includes(portionSize),
+    );
 
-        // To ensure the frontend framework actually notices the change
-        selectElement.dispatchEvent(new Event('change'));
+    if (matchingLabel) {
+      const radioInput = matchingLabel.querySelector('input[name="meal-size"]');
+      if (radioInput) {
+        radioInput.checked = true;
+
+        // Dispatch a click event to ensure the frontend framework notices the change
+        radioInput.dispatchEvent(new Event('click'));
+
+        // Mark that the portion size has been set so we only default it once
+        meal.dataset.portionSizeSet = 'true';
       }
     }
   }
@@ -274,8 +278,8 @@
       const title = titleElement?.textContent.trim() ?? '';
 
       // Ensure the meal title/price contrasts against the background
-      meal.querySelectorAll(addToCartBoxGrey).forEach((element) => {
-        element.classList.remove('text-primary-graylight');
+      meal.querySelectorAll('.text-secondary').forEach((element) => {
+        element.classList.remove('text-secondary');
         element.classList.add('text-white');
       });
 

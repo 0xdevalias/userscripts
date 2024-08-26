@@ -9,7 +9,7 @@
 // @supportURL    https://github.com/0xdevalias/userscripts/issues
 // @downloadURL   https://github.com/0xdevalias/userscripts/raw/main/userscripts/nourishd-meal-highlighter/nourishd-meal-highlighter.user.js
 // @namespace     https://www.devalias.net/
-// @version       0.1.9
+// @version       0.1.10
 // @match         https://nourishd.com.au/menu
 // @grant         GM_registerMenuCommand
 // ==/UserScript==
