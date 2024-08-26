@@ -57,6 +57,7 @@
     'Italian Sausage Gnocchi',
     'Korean Sesame Chicken and Broccoli',
     'Kung Pao Chicken',
+    'Lamb Shank Scotch Broth',
     'Moroccan Beef & Apricot Tagine with Basmati Rice',
     'Off The Bone Lamb Shanks',
     'Portuguese Chicken',
@@ -146,6 +147,7 @@
     'Nasi Goreng',
     'Pumpkin Risotto',
     'Satay Pork Meatballs',
+    'Teriyaki Tofu',
     'Vegetarian Singapore Noodles',
     ...sidesToIgnore,
   ];
