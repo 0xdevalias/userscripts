@@ -6,7 +6,7 @@
 // @supportURL    https://github.com/0xdevalias/userscripts/issues
 // @downloadURL   https://github.com/0xdevalias/userscripts/raw/main/userscripts/nourishd-meal-highlighter/nourishd-meal-highlighter.user.js
 // @namespace     https://www.devalias.net/
-// @version       0.1.11
+// @version       0.1.12
 // @match         https://nourishd.com.au/menu
 // @grant         GM_registerMenuCommand
 // ==/UserScript==
@@ -161,6 +161,7 @@
 
   const validPortionSizes = ['R', 'L', 'XL'];
 
+  const dietaryCheckboxSelector = '[wire\\:model="dietaryPreference"]';
   const mealsContainerSelector = 'main .container > div > div:nth-child(2)';
   const mealsSelector = '[x-data="{ sizeGuide: false }"] > div:nth-child(1)';
   const mealTitleSelector = '.text-center > div > h3 > a';
@@ -415,6 +416,17 @@
       attachObserver(document.body, initialObserverHandler);
     }
   };
+
+  // Uncheck the dietary preferences checkbox when the page first loads
+  observeTargetElement(dietaryCheckboxSelector, ({ observedElement }) => {
+    if (observedElement.dataset.dietaryPreferenceUnchecked === 'true') return;
+
+    if (observedElement.checked) {
+      observedElement.checked = false;
+      observedElement.dispatchEvent(new Event('click'));
+      observedElement.dataset.dietaryPreferenceUnchecked = 'true';
+    }
+  });
 
   observeTargetElement(mealsContainerSelector, processMeals);
 
