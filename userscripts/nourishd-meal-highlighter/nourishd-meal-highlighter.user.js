@@ -6,7 +6,7 @@
 // @supportURL    https://github.com/0xdevalias/userscripts/issues
 // @downloadURL   https://github.com/0xdevalias/userscripts/raw/main/userscripts/nourishd-meal-highlighter/nourishd-meal-highlighter.user.js
 // @namespace     https://www.devalias.net/
-// @version       0.1.10
+// @version       0.1.11
 // @match         https://nourishd.com.au/menu
 // @grant         GM_registerMenuCommand
 // ==/UserScript==
@@ -162,8 +162,8 @@
   const validPortionSizes = ['R', 'L', 'XL'];
 
   const mealsContainerSelector = 'main .container > div > div:nth-child(2)';
-  const mealsSelector = '[x-data="{ sizeGuide: false }"] > div';
-  const mealTitleSelector = '.text-secondary > h3 > a';
+  const mealsSelector = '[x-data="{ sizeGuide: false }"] > div:nth-child(1)';
+  const mealTitleSelector = '.text-center > div > h3 > a';
   const mealImageSelector =
     '.meal-slider-image > img, .meal-slider-image > video';
 
