@@ -6,9 +6,9 @@
 // @supportURL    https://github.com/0xdevalias/userscripts/issues
 // @downloadURL   https://github.com/0xdevalias/userscripts/raw/main/userscripts/amazon-prime-gaming-highlighter/amazon-prime-gaming-highlighter.user.js
 // @namespace     https://www.devalias.net/
-// @version       1.0.4
+// @version       1.0.5
 // @match         https://gaming.amazon.com/home
-// @grant         none
+// @grant         GM_openInTab
 // ==/UserScript==
 
 // Amazon Prime Gaming - CSS Selectors / etc: https://gist.github.com/0xdevalias/2d156a148902e31580f247e3d80d38c3
@@ -207,9 +207,143 @@
     });
   }
 
+  function collectClaimURLs() {
+    const claimButtons = new Set(
+      Array.from(document.querySelectorAll('.item-card__claim-button a[href]'))
+    );
+
+    return Array.from(claimButtons)
+      .map(button => button.href)
+      .filter(url => !url.includes('/web-games/'));
+  }
+
+  function copyURLsToClipboard(urls) {
+    const tempTextarea = document.createElement("textarea");
+    tempTextarea.value = urls.join("\n");
+    document.body.appendChild(tempTextarea);
+    tempTextarea.select();
+    document.execCommand("copy");
+    document.body.removeChild(tempTextarea);
+
+    alert("URLs copied to clipboard!");
+  }
+
+  function createUtilityButtons() {
+    const containerId = "apgh-utility-buttons-container";
+
+    // Check if the container already exists
+    let container = document.getElementById(containerId);
+    if (container) {
+      return; // Bail early if the container already exists
+    }
+
+    // Create the main container
+    container = document.createElement("div");
+    container.id = containerId;
+    container.style.position = "fixed";
+    container.style.bottom = "10px";
+    container.style.right = "20px";
+    container.style.zIndex = "1000";
+    container.style.display = "flex";
+    container.style.flexDirection = "column";
+    container.style.alignItems = "flex-end"; // Align everything to the right
+    container.style.backgroundColor = "transparent";
+    container.style.gap = "10px";
+
+    let isExpanded = true; // Start expanded
+
+    // Create a flex container for the toggle button
+    const toggleContainer = document.createElement("div");
+    toggleContainer.style.display = "flex";
+    toggleContainer.style.justifyContent = "flex-end"; // Keep the toggle button right-aligned
+    toggleContainer.style.width = "100%";
+
+    // Create the toggle button
+    const toggleButton = document.createElement("button");
+    toggleButton.textContent = "⚙️"; // Toggle button without up/down icons
+    toggleButton.style.width = "40px";
+    toggleButton.style.height = "40px";
+    toggleButton.style.border = "none";
+    toggleButton.style.borderRadius = "50%";
+    toggleButton.style.backgroundColor = "#0073e6";
+    toggleButton.style.color = "#fff";
+    toggleButton.style.fontSize = "16px";
+    toggleButton.style.cursor = "pointer";
+    toggleButton.style.display = "flex";
+    toggleButton.style.alignItems = "center";
+    toggleButton.style.justifyContent = "center";
+    toggleButton.style.boxShadow = "0 2px 5px rgba(0, 0, 0, 0.1)";
+    toggleButton.style.transition = "background-color 0.3s ease";
+
+    toggleButton.onmouseenter = () => (toggleButton.style.backgroundColor = "#005bb5");
+    toggleButton.onmouseleave = () => (toggleButton.style.backgroundColor = "#0073e6");
+
+    toggleButton.onclick = () => {
+      isExpanded = !isExpanded;
+      updateContainerVisibility();
+    };
+
+    // Append the toggle button to its container
+    toggleContainer.appendChild(toggleButton);
+
+    const createButton = (text, onClick) => {
+      const button = document.createElement("button");
+      button.textContent = text;
+      button.style.padding = "10px 15px";
+      button.style.fontSize = "14px";
+      button.style.cursor = "pointer";
+      button.style.border = "1px solid #0073e6";
+      button.style.borderRadius = "5px";
+      button.style.backgroundColor = "#0073e6";
+      button.style.color = "#fff";
+      button.style.boxShadow = "0 2px 5px rgba(0, 0, 0, 0.1)";
+      button.style.transition = "background-color 0.3s ease";
+
+      button.onmouseenter = () => (button.style.backgroundColor = "#005bb5");
+      button.onmouseleave = () => (button.style.backgroundColor = "#0073e6");
+
+      button.onclick = onClick;
+      return button;
+    };
+
+    const copyButton = createButton("Copy Claim URLs", () => {
+      const urls = collectClaimURLs();
+      copyURLsToClipboard(urls);
+    });
+
+    const openButton = createButton("Open Claim URLs", () => {
+      const urls = collectClaimURLs();
+      urls.forEach(url => GM_openInTab(url, { active: false }));
+    });
+
+    const updateContainerVisibility = () => {
+      if (isExpanded) {
+        copyButton.style.display = "block";
+        openButton.style.display = "block";
+      } else {
+        copyButton.style.display = "none";
+        openButton.style.display = "none";
+      }
+    };
+
+    // Append buttons to the main container
+    container.appendChild(copyButton);
+    container.appendChild(openButton);
+
+    // Append the toggle container to the main container
+    container.appendChild(toggleContainer);
+
+    // Append the main container to the body
+    document.body.appendChild(container);
+
+    // Initialize visibility
+    updateContainerVisibility();
+  }
+
   const observer = new MutationObserver(highlightGames);
   observer.observe(document.body, { childList: true, subtree: true });
 
   // Run initial highlighting
   highlightGames();
+  createUtilityButtons();
 })();
