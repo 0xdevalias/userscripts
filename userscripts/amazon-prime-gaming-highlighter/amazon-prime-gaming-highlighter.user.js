@@ -16,122 +16,118 @@
 // Original ChatGPT Reference: https://chat.openai.com/c/abe84fdd-752a-4deb-bef3-02bb5b09f84e
 
 (function () {
-  "use strict";
+  'use strict';
 
   const DEBUG = false;
 
   const gamesToHighlight = [
-    "League of Legends",
-    "League of Legends: Wild Rift",
-    "RuneScape",
-    "World of Warcraft",
+    'League of Legends',
+    'League of Legends: Wild Rift',
+    'RuneScape',
+    'World of Warcraft',
   ];
 
   const gamesToIgnore = [
-    "Aion Classic",
-    "Aion",
-    "Apex Legends",
-    "Asphalt 9: Legends",
-    "BTS Island: In the SEOM",
-    "Battlefield 2042",
-    "Big Farm: Mobile Harvest",
-    "Black Desert Mobile",
-    "Black Desert Online",
-    "Blade & Soul",
-    "Blankos Block Party",
-    "Bloons TD 6",
-    "Brawlers",
-    "Brawlhalla",
-    "Call of Duty: Mobile",
-    "Call of Duty: Warzone and Modern Warfare 2",
-    "Candy Crush Saga",
-    "Candy Crush Soda Saga",
-    "Champions Ascension",
-    "Company of Heroes 3",
-    "Cyberpunk 2077: Phantom Liberty",
-    "DKO: Divine Knockout",
-    "Dead Island 2",
-    "Dead by Daylight",
-    "Destiny 2",
-    "Diablo IV",
-    "EA SPORTS FC 24",
-    "F1 23",
-    "FIFA 23",
-    "Fall Guys",
-    "Fallout 76",
-    "Farm Heroes Saga",
-    "Genshin Impact",
-    "Gods Unchained",
-    "Guild Wars 2",
-    "Hearthstone",
-    "Hi-Fi RUSH",
-    "Honkai: Star Rail",
-    "Just Dance 2023 Edition",
-    "Legends of Runeterra",
-    "Lineage II",
-    "Lineage II: Aden",
-    "Lineage II: Classic",
-    "Lords Mobile",
-    "Lost Ark",
-    "Madden NFL 23",
-    "Madden NFL 24",
-    "Marvel Contest of Champions",
-    "Mojo Melee",
-    "Monster Hunter Now",
-    "My Pet Hooligan",
-    "NFL Rivals",
-    "Naraka: Bladepoint",
-    "New World",
-    "Overwatch 2",
-    "PUBG MOBILE",
-    "PUBG: BATTLEGROUNDS",
-    "Paladins",
-    "Partie",
-    "Phantasy Star Online 2 New Genesis - Global",
-    "PlanetSide 2",
-    "Pokémon GO",
-    "RAID: Shadow Legends",
-    "Realm Royale Reforged",
-    "Risk: Global Domination",
-    "Roblox",
-    "Rogue Company",
-    "SMITE",
-    "Shadow Fight 3",
-    "Star Trek: Timelines",
-    "Teamfight Tactics",
-    "The Elder Scrolls Online",
-    "Time Princess",
+    'Aion Classic',
+    'Aion',
+    'Apex Legends',
+    'Asphalt 9: Legends',
+    'BTS Island: In the SEOM',
+    'Battlefield 2042',
+    'Big Farm: Mobile Harvest',
+    'Black Desert Mobile',
+    'Black Desert Online',
+    'Blade & Soul',
+    'Blankos Block Party',
+    'Bloons TD 6',
+    'Brawlers',
+    'Brawlhalla',
+    'Call of Duty: Mobile',
+    'Call of Duty: Warzone and Modern Warfare 2',
+    'Candy Crush Saga',
+    'Candy Crush Soda Saga',
+    'Champions Ascension',
+    'Company of Heroes 3',
+    'Cyberpunk 2077: Phantom Liberty',
+    'DKO: Divine Knockout',
+    'Dead Island 2',
+    'Dead by Daylight',
+    'Destiny 2',
+    'Diablo IV',
+    'EA SPORTS FC 24',
+    'F1 23',
+    'FIFA 23',
+    'Fall Guys',
+    'Fallout 76',
+    'Farm Heroes Saga',
+    'Genshin Impact',
+    'Gods Unchained',
+    'Guild Wars 2',
+    'Hearthstone',
+    'Hi-Fi RUSH',
+    'Honkai: Star Rail',
+    'Just Dance 2023 Edition',
+    'Legends of Runeterra',
+    'Lineage II',
+    'Lineage II: Aden',
+    'Lineage II: Classic',
+    'Lords Mobile',
+    'Lost Ark',
+    'Madden NFL 23',
+    'Madden NFL 24',
+    'Marvel Contest of Champions',
+    'Mojo Melee',
+    'Monster Hunter Now',
+    'My Pet Hooligan',
+    'NFL Rivals',
+    'Naraka: Bladepoint',
+    'New World',
+    'Overwatch 2',
+    'PUBG MOBILE',
+    'PUBG: BATTLEGROUNDS',
+    'Paladins',
+    'Partie',
+    'Phantasy Star Online 2 New Genesis - Global',
+    'PlanetSide 2',
+    'Pokémon GO',
+    'RAID: Shadow Legends',
+    'Realm Royale Reforged',
+    'Risk: Global Domination',
+    'Roblox',
+    'Rogue Company',
+    'SMITE',
+    'Shadow Fight 3',
+    'Star Trek: Timelines',
+    'Teamfight Tactics',
+    'The Elder Scrolls Online',
+    'Time Princess',
     "Tom Clancy's Rainbow Six Siege",
-    "Total War: Warhammer II",
-    "Two Point Campus",
-    "VALORANT",
-    "Warframe",
-    "World of Tanks",
-    "World of Warships",
-    "World of Warships: Legends",
+    'Total War: Warhammer II',
+    'Two Point Campus',
+    'VALORANT',
+    'Warframe',
+    'World of Tanks',
+    'World of Warships',
+    'World of Warships: Legends',
   ];
 
   const sectionsToMatch = [
-    "offer-section-DIGITAL_WEEK_GAMES",
-    "offer-section-RECOMMENDED",
-    "offer-section-WEB_GAMES",
-    "offer-section-TOP_PICKS",
-    "offer-section-EXPIRING",
-    "offer-section-FGWP",
-    "offer-section-IN_GAME_LOOT",
-    "offer-section-FGWP_FULL",
+    'offer-section-DIGITAL_WEEK_GAMES',
+    'offer-section-RECOMMENDED',
+    'offer-section-WEB_GAMES',
+    'offer-section-TOP_PICKS',
+    'offer-section-EXPIRING',
+    'offer-section-FGWP',
+    'offer-section-IN_GAME_LOOT',
+    'offer-section-FGWP_FULL',
   ];
 
-  const sectionsWithTitleInHeading = [
-    "offer-section-WEB_GAMES",
-  ];
+  const sectionsWithTitleInHeading = ['offer-section-WEB_GAMES'];
 
-  const sectionsToIgnore = [
-    "offer-section-WEB_GAMES",
-  ];
+  const sectionsToIgnore = ['offer-section-WEB_GAMES'];
 
   function styleAsHighlighted(element) {
-    element.style.backgroundColor = "green";
+    element.style.backgroundColor = 'green';
   }
 
   function styleAsCollected(element) {
@@ -139,12 +135,15 @@
   }
 
   function styleAsIgnored(element) {
-    element.style.backgroundColor = "red";
+    element.style.backgroundColor = 'red';
     element.style.opacity = 0.25;
 
     // This extra background class seems to conflict/override the colour we set above.. so we remove it
     const cardDetails = element.querySelector('.item-card-details');
-    if (cardDetails && cardDetails.classList.contains('tw-c-background-free-game')) {
+    if (
+      cardDetails &&
+      cardDetails.classList.contains('tw-c-background-free-game')
+    ) {
       cardDetails.classList.remove('tw-c-background-free-game');
     }
   }
@@ -157,9 +156,13 @@
 
   function getTitleForCard({ card, section }) {
     if (sectionsWithTitleInHeading.includes(section)) {
-      return card.querySelector(".item-card-details .item-card-details__body .item-card-details__body__primary > [title]")?.title;
+      return card.querySelector(
+        '.item-card-details .item-card-details__body .item-card-details__body__primary > [title]',
+      )?.title;
     } else {
-      return card.querySelector(".item-card-details .item-card-details__body p > a[aria-label]")?.ariaLabel;
+      return card.querySelector(
+        '.item-card-details .item-card-details__body p > a[aria-label]',
+      )?.ariaLabel;
     }
   }
 
@@ -182,9 +185,12 @@
 
             DEBUG &&
               console.log(
-                `[APGH] Highlighting section=${section} title=${title}`
+                `[APGH] Highlighting section=${section} title=${title}`,
               );
-          } else if (gamesToIgnore.includes(title) || sectionsToIgnore.includes(section)) {
+          } else if (
+            gamesToIgnore.includes(title) ||
+            sectionsToIgnore.includes(section)
+          ) {
             styleAsIgnored(card);
 
             DEBUG &&
@@ -200,7 +206,7 @@
 
           DEBUG &&
             console.log(
-              `[APGH] Already collected section=${section} title=${title}`
+              `[APGH] Already collected section=${section} title=${title}`,
             );
         }
       });
@@ -209,27 +215,27 @@
 
   function collectClaimURLs() {
     const claimButtons = new Set(
-      Array.from(document.querySelectorAll('.item-card__claim-button a[href]'))
+      Array.from(document.querySelectorAll('.item-card__claim-button a[href]')),
     );
 
     return Array.from(claimButtons)
-      .map(button => button.href)
-      .filter(url => !url.includes('/web-games/'));
+      .map((button) => button.href)
+      .filter((url) => !url.includes('/web-games/'));
   }
 
   function copyURLsToClipboard(urls) {
-    const tempTextarea = document.createElement("textarea");
-    tempTextarea.value = urls.join("\n");
+    const tempTextarea = document.createElement('textarea');
+    tempTextarea.value = urls.join('\n');
     document.body.appendChild(tempTextarea);
     tempTextarea.select();
-    document.execCommand("copy");
+    document.execCommand('copy');
     document.body.removeChild(tempTextarea);
 
-    alert("URLs copied to clipboard!");
+    alert('URLs copied to clipboard!');
   }
 
   function createUtilityButtons() {
-    const containerId = "apgh-utility-buttons-container";
+    const containerId = 'apgh-utility-buttons-container';
 
     // Check if the container already exists
     let container = document.getElementById(containerId);
@@ -238,45 +244,47 @@
     }
 
     // Create the main container
-    container = document.createElement("div");
+    container = document.createElement('div');
     container.id = containerId;
-    container.style.position = "fixed";
-    container.style.bottom = "10px";
-    container.style.right = "20px";
-    container.style.zIndex = "1000";
-    container.style.display = "flex";
-    container.style.flexDirection = "column";
-    container.style.alignItems = "flex-end"; // Align everything to the right
-    container.style.backgroundColor = "transparent";
-    container.style.gap = "10px";
+    container.style.position = 'fixed';
+    container.style.bottom = '10px';
+    container.style.right = '20px';
+    container.style.zIndex = '1000';
+    container.style.display = 'flex';
+    container.style.flexDirection = 'column';
+    container.style.alignItems = 'flex-end'; // Align everything to the right
+    container.style.backgroundColor = 'transparent';
+    container.style.gap = '10px';
 
     let isExpanded = true; // Start expanded
 
     // Create a flex container for the toggle button
-    const toggleContainer = document.createElement("div");
-    toggleContainer.style.display = "flex";
-    toggleContainer.style.justifyContent = "flex-end"; // Keep the toggle button right-aligned
-    toggleContainer.style.width = "100%";
+    const toggleContainer = document.createElement('div');
+    toggleContainer.style.display = 'flex';
+    toggleContainer.style.justifyContent = 'flex-end'; // Keep the toggle button right-aligned
+    toggleContainer.style.width = '100%';
 
     // Create the toggle button
-    const toggleButton = document.createElement("button");
-    toggleButton.textContent = "⚙️"; // Toggle button without up/down icons
-    toggleButton.style.width = "40px";
-    toggleButton.style.height = "40px";
-    toggleButton.style.border = "none";
-    toggleButton.style.borderRadius = "50%";
-    toggleButton.style.backgroundColor = "#0073e6";
-    toggleButton.style.color = "#fff";
-    toggleButton.style.fontSize = "16px";
-    toggleButton.style.cursor = "pointer";
-    toggleButton.style.display = "flex";
-    toggleButton.style.alignItems = "center";
-    toggleButton.style.justifyContent = "center";
-    toggleButton.style.boxShadow = "0 2px 5px rgba(0, 0, 0, 0.1)";
-    toggleButton.style.transition = "background-color 0.3s ease";
+    const toggleButton = document.createElement('button');
+    toggleButton.textContent = '⚙️'; // Toggle button without up/down icons
+    toggleButton.style.width = '40px';
+    toggleButton.style.height = '40px';
+    toggleButton.style.border = 'none';
+    toggleButton.style.borderRadius = '50%';
+    toggleButton.style.backgroundColor = '#0073e6';
+    toggleButton.style.color = '#fff';
+    toggleButton.style.fontSize = '16px';
+    toggleButton.style.cursor = 'pointer';
+    toggleButton.style.display = 'flex';
+    toggleButton.style.alignItems = 'center';
+    toggleButton.style.justifyContent = 'center';
+    toggleButton.style.boxShadow = '0 2px 5px rgba(0, 0, 0, 0.1)';
+    toggleButton.style.transition = 'background-color 0.3s ease';
 
-    toggleButton.onmouseenter = () => (toggleButton.style.backgroundColor = "#005bb5");
-    toggleButton.onmouseleave = () => (toggleButton.style.backgroundColor = "#0073e6");
+    toggleButton.onmouseenter = () =>
+      (toggleButton.style.backgroundColor = '#005bb5');
+    toggleButton.onmouseleave = () =>
+      (toggleButton.style.backgroundColor = '#0073e6');
 
     toggleButton.onclick = () => {
       isExpanded = !isExpanded;
@@ -287,42 +295,42 @@
     toggleContainer.appendChild(toggleButton);
 
     const createButton = (text, onClick) => {
-      const button = document.createElement("button");
+      const button = document.createElement('button');
       button.textContent = text;
-      button.style.padding = "10px 15px";
-      button.style.fontSize = "14px";
-      button.style.cursor = "pointer";
-      button.style.border = "1px solid #0073e6";
-      button.style.borderRadius = "5px";
-      button.style.backgroundColor = "#0073e6";
-      button.style.color = "#fff";
-      button.style.boxShadow = "0 2px 5px rgba(0, 0, 0, 0.1)";
-      button.style.transition = "background-color 0.3s ease";
+      button.style.padding = '10px 15px';
+      button.style.fontSize = '14px';
+      button.style.cursor = 'pointer';
+      button.style.border = '1px solid #0073e6';
+      button.style.borderRadius = '5px';
+      button.style.backgroundColor = '#0073e6';
+      button.style.color = '#fff';
+      button.style.boxShadow = '0 2px 5px rgba(0, 0, 0, 0.1)';
+      button.style.transition = 'background-color 0.3s ease';
 
-      button.onmouseenter = () => (button.style.backgroundColor = "#005bb5");
-      button.onmouseleave = () => (button.style.backgroundColor = "#0073e6");
+      button.onmouseenter = () => (button.style.backgroundColor = '#005bb5');
+      button.onmouseleave = () => (button.style.backgroundColor = '#0073e6');
 
       button.onclick = onClick;
       return button;
     };
 
-    const copyButton = createButton("Copy Claim URLs", () => {
+    const copyButton = createButton('Copy Claim URLs', () => {
       const urls = collectClaimURLs();
       copyURLsToClipboard(urls);
     });
 
-    const openButton = createButton("Open Claim URLs", () => {
+    const openButton = createButton('Open Claim URLs', () => {
       const urls = collectClaimURLs();
-      urls.forEach(url => GM_openInTab(url, { active: false }));
+      urls.forEach((url) => GM_openInTab(url, { active: false }));
     });
 
     const updateContainerVisibility = () => {
       if (isExpanded) {
-        copyButton.style.display = "block";
-        openButton.style.display = "block";
+        copyButton.style.display = 'block';
+        openButton.style.display = 'block';
       } else {
-        copyButton.style.display = "none";
-        openButton.style.display = "none";
+        copyButton.style.display = 'none';
+        openButton.style.display = 'none';
       }
     };
 
