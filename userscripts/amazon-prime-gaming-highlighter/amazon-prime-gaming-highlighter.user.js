@@ -6,7 +6,7 @@
 // @supportURL    https://github.com/0xdevalias/userscripts/issues
 // @downloadURL   https://github.com/0xdevalias/userscripts/raw/main/userscripts/amazon-prime-gaming-highlighter/amazon-prime-gaming-highlighter.user.js
 // @namespace     https://www.devalias.net/
-// @version       1.0.6
+// @version       1.0.7
 // @match         https://gaming.amazon.com/home
 // @grant         GM_openInTab
 // ==/UserScript==
@@ -154,6 +154,12 @@
     return Array.from(document.querySelectorAll(sectionCardsSelector));
   }
 
+  function getBlocksInSection(section) {
+    const sectionBlocksSelector = `div[data-a-target="${section}"] .offer-list__content__grid > .tw-block, div[data-a-target="${section}"] .grid-carousel__slide > .tw-block`;
+
+    return Array.from(document.querySelectorAll(sectionBlocksSelector));
+  }
+
   function getTitleForCard({ card, section }) {
     if (sectionsWithTitleInHeading.includes(section)) {
       return card.querySelector(
@@ -214,13 +220,36 @@
   }
 
   function collectClaimURLs() {
-    const claimButtons = new Set(
-      Array.from(document.querySelectorAll('.item-card__claim-button a[href]'))
-        .map((button) => button.href)
-        .filter((url) => !url.includes('/web-games/')),
-    );
+    const uniqueClaimURLs = new Set();
 
-    return Array.from(claimButtons);
+    sectionsToMatch.forEach((section) => {
+      if (sectionsToIgnore.includes(section)) {
+        DEBUG && console.log(`[APGH] Skipping claim URL for ignored section=${section}`);
+        return;
+      }
+
+      getBlocksInSection(section).forEach((sectionBlock) => {
+        if (isItemCollected(sectionBlock)) {
+          DEBUG && console.log(`[APGH] Skipping claim URL for collected item for section=${section}`);
+          return;
+        }
+
+        Array.from(
+          new Set(
+            Array.from(sectionBlock.querySelectorAll('[data-a-target="learn-more-card"]'))
+              .map(el => el.href)
+              .filter((url) => !url.includes('/web-games/'))
+              .map(href => href.replace('/details', ''))
+          )
+        ).forEach(url => {
+          DEBUG && console.log(`[APGH] Found claim URL: ${url}`);
+
+          uniqueClaimURLs.add(url)
+        });
+      });
+    });
+
+    return Array.from(uniqueClaimURLs);
   }
 
   function copyURLsToClipboard(urls) {
