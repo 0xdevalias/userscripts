@@ -6,7 +6,7 @@
 // @supportURL    https://github.com/0xdevalias/userscripts/issues
 // @downloadURL   https://github.com/0xdevalias/userscripts/raw/main/userscripts/amazon-prime-gaming-highlighter/amazon-prime-gaming-highlighter.user.js
 // @namespace     https://www.devalias.net/
-// @version       1.0.5
+// @version       1.0.6
 // @match         https://gaming.amazon.com/home
 // @grant         GM_openInTab
 // ==/UserScript==
@@ -215,12 +215,12 @@
 
   function collectClaimURLs() {
     const claimButtons = new Set(
-      Array.from(document.querySelectorAll('.item-card__claim-button a[href]')),
+      Array.from(document.querySelectorAll('.item-card__claim-button a[href]'))
+        .map((button) => button.href)
+        .filter((url) => !url.includes('/web-games/')),
     );
 
-    return Array.from(claimButtons)
-      .map((button) => button.href)
-      .filter((url) => !url.includes('/web-games/'));
+    return Array.from(claimButtons);
   }
 
   function copyURLsToClipboard(urls) {
