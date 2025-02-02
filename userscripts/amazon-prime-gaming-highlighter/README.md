@@ -11,6 +11,9 @@
 // @namespace     https://www.devalias.net/
 // @version       1.0.7
 // @match         https://gaming.amazon.com/home
+// @grant         GM_getValue
+// @grant         GM_setValue
+// @grant         GM_registerMenuCommand
 // @grant         GM_openInTab
 // ==/UserScript==
 ```

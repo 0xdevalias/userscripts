@@ -8,6 +8,9 @@
 // @namespace     https://www.devalias.net/
 // @version       1.0.7
 // @match         https://gaming.amazon.com/home
+// @grant         GM_getValue
+// @grant         GM_setValue
+// @grant         GM_registerMenuCommand
 // @grant         GM_openInTab
 // ==/UserScript==
 
@@ -17,8 +20,6 @@
 
 (function () {
   'use strict';
-
-  const DEBUG = false;
 
   const gamesToHighlight = [
     'League of Legends',
@@ -124,6 +125,29 @@
 
   const sectionsToIgnore = ['offer-section-WEB_GAMES'];
 
+  const LOG_PREFIX = '[userscript::APGH]';
+  let DEBUG = GM_getValue('isDebugEnabled', false);
+
+  function debugLog(...args) {
+    if (!DEBUG) return;
+    console.log(LOG_PREFIX, ...args, { DEBUG });
+  }
+
+  function registerOrUpdateDebugMenuItem() {
+    GM_registerMenuCommand(
+      `Toggle Debug Mode (currently ${DEBUG ? 'ON' : 'OFF'})`,
+      toggleDebug,
+      { id: 'debugToggle' },
+    );
+    console.log(LOG_PREFIX, `Debug mode is now ${DEBUG ? 'ON' : 'OFF'}`);
+  }
+
+  function toggleDebug() {
+    DEBUG = !GM_getValue('isDebugEnabled', false);
+    GM_setValue('isDebugEnabled', DEBUG);
+    registerOrUpdateDebugMenuItem();
+  }
+
   function styleAsHighlighted(element) {
     element.style.backgroundColor = 'green';
   }
@@ -190,39 +214,35 @@
           if (gamesToHighlight.includes(title)) {
             styleAsHighlighted(card);
 
-            DEBUG &&
-              console.log(`[APGH::highlightGames] Highlighting`, {
-                section,
-                title,
-              });
+            debugLog(`[highlightGames] Highlighting`, {
+              section,
+              title,
+            });
           } else if (
             gamesToIgnore.includes(title) ||
             sectionsToIgnore.includes(section)
           ) {
             styleAsIgnored(card);
 
-            DEBUG &&
-              console.log(`[APGH::highlightGames] Ignoring`, {
-                section,
-                title,
-              });
+            debugLog(`[highlightGames] Ignoring`, {
+              section,
+              title,
+            });
           } else {
-            DEBUG &&
-              console.log(`[APGH::highlightGames] Unhandled`, {
-                section,
-                title,
-              });
+            debugLog(`[highlightGames] Unhandled`, {
+              section,
+              title,
+            });
           }
         }
 
         if (isItemCollected(card)) {
           styleAsCollected(card);
 
-          DEBUG &&
-            console.log(`[APGH::highlightGames] Already collected`, {
-              section,
-              title,
-            });
+          debugLog(`[highlightGames] Already collected`, {
+            section,
+            title,
+          });
         }
       });
     });
@@ -233,10 +253,9 @@
 
     sectionsToMatch.forEach((section) => {
       if (sectionsToIgnore.includes(section)) {
-        DEBUG &&
-          console.log(`[APGH::collectClaimURLs] Skipping (ignored section)`, {
-            section,
-          });
+        debugLog(`[collectClaimURLs] Skipping (ignored section)`, {
+          section,
+        });
         return;
       }
 
@@ -244,25 +263,20 @@
         const title = getTitleForItem(sectionBlock);
 
         if (gamesToIgnore.includes(title)) {
-          DEBUG &&
-            console.log(`[APGH::collectClaimURLs] Skipping (ignored item)`, {
-              section,
-              title,
-              sectionBlock,
-            });
+          debugLog(`[collectClaimURLs] Skipping (ignored item)`, {
+            section,
+            title,
+            sectionBlock,
+          });
           return;
         }
 
         if (isItemCollected(sectionBlock)) {
-          DEBUG &&
-            console.log(
-              `[APGH::collectClaimURLs] Skipping (already collected)`,
-              {
-                section,
-                title,
-                sectionBlock,
-              },
-            );
+          debugLog(`[collectClaimURLs] Skipping (already collected)`, {
+            section,
+            title,
+            sectionBlock,
+          });
           return;
         }
 
@@ -278,8 +292,7 @@
               .map((href) => href.replace('/details', '')),
           ),
         ).forEach((url) => {
-          DEBUG &&
-            console.log(`[APGH::collectClaimURLs] Found claim URL: ${url}`);
+          debugLog(`[collectClaimURLs] Found claim URL: ${url}`);
 
           uniqueClaimURLs.add(url);
         });
@@ -434,4 +447,5 @@
   // Run initial highlighting
   highlightGames();
   createUtilityButtons();
+  registerOrUpdateDebugMenuItem();
 })();
