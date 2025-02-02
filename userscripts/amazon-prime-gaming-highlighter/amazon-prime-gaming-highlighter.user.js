@@ -280,6 +280,11 @@
   }
 
   function copyURLsToClipboard(urls) {
+    if (urls.length === 0) {
+      alert('No claim URLs found to copy.');
+      return;
+    }
+
     const tempTextarea = document.createElement('textarea');
     tempTextarea.value = urls.join('\n');
     document.body.appendChild(tempTextarea);
