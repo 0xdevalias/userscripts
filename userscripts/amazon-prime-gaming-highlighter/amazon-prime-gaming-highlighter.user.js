@@ -122,8 +122,6 @@
     'offer-section-FGWP_FULL',
   ];
 
-  const sectionsWithTitleInHeading = ['offer-section-WEB_GAMES'];
-
   const sectionsToIgnore = ['offer-section-WEB_GAMES'];
 
   function styleAsHighlighted(element) {
@@ -160,16 +158,19 @@
     return Array.from(document.querySelectorAll(sectionBlocksSelector));
   }
 
-  function getTitleForCard({ card, section }) {
-    if (sectionsWithTitleInHeading.includes(section)) {
-      return card.querySelector(
-        '.item-card-details .item-card-details__body .item-card-details__body__primary > [title]',
-      )?.title;
-    } else {
-      return card.querySelector(
-        '.item-card-details .item-card-details__body p > a[aria-label]',
-      )?.ariaLabel;
-    }
+  function getTitleForItem(item) {
+    return (
+      // This gets the game title for in-game content
+      item.querySelector(
+        '.item-card-details .item-card-details__body a[data-a-target="item-card-detail-footer-secondary-link"]',
+      )?.ariaLabel ||
+      // These attempt to get the game title for standard cards
+      item.querySelector(
+        '.item-card-details .item-card-details__body .item-card-details__body__primary h3[title]',
+      )?.title ||
+      item.querySelector('.tw-block a[data-a-target="learn-more-card"]')
+        ?.ariaLabel
+    );
   }
 
   function isItemCollected(item) {
@@ -183,7 +184,7 @@
   function highlightGames() {
     sectionsToMatch.forEach((section) => {
       getCardsInSection(section).forEach((card) => {
-        const title = getTitleForCard({ card, section });
+        const title = getTitleForItem(card);
 
         if (title) {
           if (gamesToHighlight.includes(title)) {
