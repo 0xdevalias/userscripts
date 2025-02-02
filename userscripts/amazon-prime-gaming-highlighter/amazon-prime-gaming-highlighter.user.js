@@ -243,6 +243,16 @@
       getBlocksInSection(section).forEach((sectionBlock) => {
         const title = getTitleForItem(sectionBlock);
 
+        if (gamesToIgnore.includes(title)) {
+          DEBUG &&
+            console.log(`[APGH::collectClaimURLs] Skipping (ignored item)`, {
+              section,
+              title,
+              sectionBlock,
+            });
+          return;
+        }
+
         if (isItemCollected(sectionBlock)) {
           DEBUG &&
             console.log(
