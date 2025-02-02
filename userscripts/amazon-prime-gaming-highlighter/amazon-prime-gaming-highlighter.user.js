@@ -258,16 +258,20 @@
 
         Array.from(
           new Set(
-            Array.from(sectionBlock.querySelectorAll('[data-a-target="learn-more-card"]'))
-              .map(el => el.href)
+            Array.from(
+              sectionBlock.querySelectorAll(
+                '[data-a-target="learn-more-card"]',
+              ),
+            )
+              .map((el) => el.href)
               .filter((url) => !url.includes('/web-games/'))
-              .map(href => href.replace('/details', ''))
-          )
-        ).forEach(url => {
+              .map((href) => href.replace('/details', '')),
+          ),
+        ).forEach((url) => {
           DEBUG &&
             console.log(`[APGH::collectClaimURLs] Found claim URL: ${url}`);
 
-          uniqueClaimURLs.add(url)
+          uniqueClaimURLs.add(url);
         });
       });
     });
