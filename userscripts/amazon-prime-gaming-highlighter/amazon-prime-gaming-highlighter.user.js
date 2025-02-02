@@ -191,9 +191,10 @@
             styleAsHighlighted(card);
 
             DEBUG &&
-              console.log(
-                `[APGH] Highlighting section=${section} title=${title}`,
-              );
+              console.log(`[APGH::highlightGames] Highlighting`, {
+                section,
+                title,
+              });
           } else if (
             gamesToIgnore.includes(title) ||
             sectionsToIgnore.includes(section)
@@ -201,10 +202,16 @@
             styleAsIgnored(card);
 
             DEBUG &&
-              console.log(`[APGH] Ignoring section=${section} title=${title}`);
+              console.log(`[APGH::highlightGames] Ignoring`, {
+                section,
+                title,
+              });
           } else {
             DEBUG &&
-              console.log(`[APGH] Unhandled section=${section} title=${title}`);
+              console.log(`[APGH::highlightGames] Unhandled`, {
+                section,
+                title,
+              });
           }
         }
 
@@ -212,9 +219,10 @@
           styleAsCollected(card);
 
           DEBUG &&
-            console.log(
-              `[APGH] Already collected section=${section} title=${title}`,
-            );
+            console.log(`[APGH::highlightGames] Already collected`, {
+              section,
+              title,
+            });
         }
       });
     });
@@ -225,13 +233,26 @@
 
     sectionsToMatch.forEach((section) => {
       if (sectionsToIgnore.includes(section)) {
-        DEBUG && console.log(`[APGH] Skipping claim URL for ignored section=${section}`);
+        DEBUG &&
+          console.log(`[APGH::collectClaimURLs] Skipping (ignored section)`, {
+            section,
+          });
         return;
       }
 
       getBlocksInSection(section).forEach((sectionBlock) => {
+        const title = getTitleForItem(sectionBlock);
+
         if (isItemCollected(sectionBlock)) {
-          DEBUG && console.log(`[APGH] Skipping claim URL for collected item for section=${section}`);
+          DEBUG &&
+            console.log(
+              `[APGH::collectClaimURLs] Skipping (already collected)`,
+              {
+                section,
+                title,
+                sectionBlock,
+              },
+            );
           return;
         }
 
@@ -243,7 +264,8 @@
               .map(href => href.replace('/details', ''))
           )
         ).forEach(url => {
-          DEBUG && console.log(`[APGH] Found claim URL: ${url}`);
+          DEBUG &&
+            console.log(`[APGH::collectClaimURLs] Found claim URL: ${url}`);
 
           uniqueClaimURLs.add(url)
         });
