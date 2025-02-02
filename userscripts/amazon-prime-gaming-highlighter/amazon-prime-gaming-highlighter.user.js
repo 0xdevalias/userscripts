@@ -295,6 +295,15 @@
     alert('URLs copied to clipboard!');
   }
 
+  function openURLs(urls) {
+    if (urls.length === 0) {
+      alert('No claim URLs found to open.');
+      return;
+    }
+
+    urls.forEach((url) => GM_openInTab(url, { active: false }));
+  }
+
   function createUtilityButtons() {
     const containerId = 'apgh-utility-buttons-container';
 
@@ -382,7 +391,7 @@
 
     const openButton = createButton('Open Claim URLs', () => {
       const urls = collectClaimURLs();
-      urls.forEach((url) => GM_openInTab(url, { active: false }));
+      openURLs(urls);
     });
 
     const updateContainerVisibility = () => {
