@@ -6,7 +6,7 @@
 // @supportURL    https://github.com/0xdevalias/userscripts/issues
 // @downloadURL   https://github.com/0xdevalias/userscripts/raw/main/userscripts/chatgpt-web-app-script-update-notifier/chatgpt-web-app-script-update-notifier.user.js
 // @namespace     https://www.devalias.net/
-// @version       0.3-alpha
+// @version       0.3.1-alpha
 // @match         https://chatgpt.com/*
 // @match         https://chat.openai.com/*
 // @exclude       https://chat.openai.com/auth/login
@@ -232,7 +232,7 @@
     document.head.getElementsByTagName("script"),
     (element) => decodeURIComponent(element.src),
   ).filter((url) =>
-    allowedURLs.some((allowedURL) => url.startsWith(allowedURL)),
+    allowedScriptURLs.some((allowedURL) => url.startsWith(allowedURL)),
   );
 
   DEBUG && console.log('scriptURLs', scriptURLs);
