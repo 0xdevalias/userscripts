@@ -15,11 +15,26 @@ My user scripts to add functionality to various sites around the web (that were 
 
 ### How to use
 
-Personally I use [Violentmonkey](https://violentmonkey.github.io/) in Chrome:
+Personally I used [Violentmonkey](https://violentmonkey.github.io/) in Chrome:
 
 - [Violentmonkey](https://violentmonkey.github.io/) ([Install](https://violentmonkey.github.io/get-it/), [Chrome](https://chrome.google.com/webstore/detail/violentmonkey/jinjaccalgkegednnccohejagnlnfdag?hl=en), [Source](https://github.com/violentmonkey/violentmonkey))
   - [Creating a userscript](https://violentmonkey.github.io/guide/creating-a-userscript/)
   - [`GM_*` APIs](https://violentmonkey.github.io/api/gm/)
+
+But since Violentmonkey haven't updated from MV2 to MV3 (at least as of 2025-08-24):
+
+- [Issue #1934: \[Feature\] Manifest V3 for Chrome](https://github.com/violentmonkey/violentmonkey/issues/1934)
+- [Issue #2284: New Chrome version doesn't support it](https://github.com/violentmonkey/violentmonkey/issues/2284)
+- [Commit `196814a`](https://github.com/violentmonkey/violentmonkey.github.io/commit/196814ab3cef929b14d3770e8a76d71dd385c4a1#diff-0305aa01e394ff1946b149dd8f794580cfaef6c4c08bc1532b497b3d94813b8cR31-R34)
+  - > WARNING:
+    >
+    > This extension is **no longer supported on Chrome** due to its Manifest V2 architecture. While a Manifest V3 rewrite might be considered in the future, it is not planned for the foreseeable future due to the considerable effort involved and the potential for losing existing features.
+    > 
+    > As an alternative, consider using [Brave](https://brave.com/) browser which is also open source, where you can install it from the Chrome Web Store.
+
+I was forced to move back to Tampermonkey (which is not open source):
+
+- [Tampermonkey](https://www.tampermonkey.net/) ([Chrome](https://chromewebstore.google.com/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo?hl=en))
 
 That said, TamperMonkey has support for some more experimental features/API's that Violentmonley doesn't/won't support (eg. [`GM_webRequest(rules, listener)`](https://www.tampermonkey.net/documentation.php?locale=en#api:GM_webRequest), [`GM_cookie.*`](https://www.tampermonkey.net/documentation.php?locale=en#api:GM_cookie.list), etc; Ref: [violentmonkey#583](https://github.com/violentmonkey/violentmonkey/issues/583), [tampermonkey#397](https://github.com/Tampermonkey/tampermonkey/issues/397))
 
