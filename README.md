@@ -6,6 +6,7 @@ My user scripts to add functionality to various sites around the web (that were 
 
 - [Amazon Prime Gaming Highlighter](./userscripts/amazon-prime-gaming-highlighter/) ([Install](https://github.com/0xdevalias/userscripts/raw/main/userscripts/amazon-prime-gaming-highlighter/amazon-prime-gaming-highlighter.user.js))
 - [ChatGPT Web App Script Update Notifier](./userscripts/chatgpt-web-app-script-update-notifier/) ([Install](https://github.com/0xdevalias/userscripts/raw/main/userscripts/chatgpt-web-app-script-update-notifier/chatgpt-web-app-script-update-notifier.user.js))
+- [Copy GitHub Repo Summary](./userscripts/copy-github-repo-summary/) ([Install](https://github.com/0xdevalias/userscripts/raw/main/userscripts/copy-github-repo-summary/copy-github-repo-summary.user.js))
 - [Freshdesk Make 'Redactor Editor' Resizeable](./userscripts/freshdesk-make-redactor-editor-resizeable/) ([Install](https://github.com/0xdevalias/userscripts/raw/main/userscripts/freshdesk-make-redactor-editor-resizeable/freshdesk-make-redactor-editor-resizeable.user.js))
 - [GitHub Gist - CodeMirror Resizer](./userscripts/github-gist-codemirror-resizer/) ([Install](https://github.com/0xdevalias/userscripts/raw/main/userscripts/github-gist-codemirror-resizer/github-gist-codemirror-resizer.user.js))
 - [GitHub Notifications - Arrow key navigation](./userscripts/github-notifications-arrow-key-navigation/) ([Install](https://github.com/0xdevalias/userscripts/raw/main/userscripts/github-notifications-arrow-key-navigation/github-notifications-arrow-key-navigation.user.js))
