@@ -7,7 +7,7 @@
 // @downloadURL   https://github.com/0xdevalias/userscripts/raw/main/userscripts/copy-github-repo-summary/copy-github-repo-summary.user.js
 // @icon          https://www.google.com/s2/favicons?sz=64&domain=github.com
 // @namespace     https://www.devalias.net/
-// @version       0.1.2
+// @version       0.1.3
 // @match         https://github.com/*/*
 // @run-at        document-start
 // @grant         GM_registerMenuCommand
@@ -28,10 +28,12 @@
       repoReadme?.querySelector("h1")?.textContent.trim() ?? "";
 
     let firstParagraph = "";
+    let firstParagraphHtml = "";
     for (const p of repoReadme?.querySelectorAll("p") ?? []) {
       const text = p.textContent.trim();
       if (text && text.length > 20) {
         firstParagraph = text;
+        firstParagraphHtml = p?.innerHTML?.trim() ?? text;
         break;
       }
     }
@@ -53,13 +55,26 @@
   - > ${firstParagraph}
 `.trim();
 
+    const htmlSummary = `
+<ul>
+  <li>${repoUrl}
+    <ul>
+      <li><blockquote>${readmeTitle}</blockquote></li>
+      <li><blockquote>${aboutDescription}</blockquote></li>
+      <li><blockquote>${firstParagraphHtml}</blockquote></li>
+    </ul>
+  </li>
+</ul>`.trim();
+
     return {
       repoUrl,
       documentTitle,
       readmeTitle,
       firstParagraph,
+      firstParagraphHtml,
       aboutDescription,
       markdownSummary,
+      htmlSummary,
     };
   }
 
@@ -68,5 +83,11 @@
     GM_setClipboard(markdownSummary, { type: "text", mimetype: "text/plain" });
   }
 
+  function copySummaryAsHTML() {
+    const { htmlSummary } = getGitHubRepoInfo();
+    GM_setClipboard(htmlSummary, { type: "html", mimetype: "text/html" });
+  }
+
   GM_registerMenuCommand("Copy GitHub repo summary", copySummary);
+  GM_registerMenuCommand("Copy GitHub repo summary (as HTML)", copySummaryAsHTML);
 })();
