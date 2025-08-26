@@ -10,7 +10,7 @@
 // @downloadURL   https://github.com/0xdevalias/userscripts/raw/main/userscripts/copy-github-repo-summary/copy-github-repo-summary.user.js
 // @icon          https://www.google.com/s2/favicons?sz=64&domain=github.com
 // @namespace     https://www.devalias.net/
-// @version       0.1.1
+// @version       0.1.2
 // @match         https://github.com/*/*
 // @run-at        document-start
 // @grant         GM_registerMenuCommand

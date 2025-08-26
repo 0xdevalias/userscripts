@@ -7,7 +7,7 @@
 // @downloadURL   https://github.com/0xdevalias/userscripts/raw/main/userscripts/copy-github-repo-summary/copy-github-repo-summary.user.js
 // @icon          https://www.google.com/s2/favicons?sz=64&domain=github.com
 // @namespace     https://www.devalias.net/
-// @version       0.1.1
+// @version       0.1.2
 // @match         https://github.com/*/*
 // @run-at        document-start
 // @grant         GM_registerMenuCommand
@@ -25,9 +25,9 @@
       document.querySelector("article.markdown-body");
 
     const readmeTitle =
-      repoReadme?.querySelector("h1")?.textContent.trim() ?? null;
+      repoReadme?.querySelector("h1")?.textContent.trim() ?? "";
 
-    let firstParagraph = null;
+    let firstParagraph = "";
     for (const p of repoReadme?.querySelectorAll("p") ?? []) {
       const text = p.textContent.trim();
       if (text && text.length > 20) {
@@ -44,14 +44,14 @@
         ? aboutHeading.nextElementSibling
         : null;
 
-    const aboutDescription = aboutP?.textContent.trim() ?? null;
+    const aboutDescription = aboutP?.textContent?.trim() ?? "";
 
-    const markdownSummary = [
-      `- ${repoUrl}`,
-      `  - > ${readmeTitle ?? ""}`,
-      `  - > ${aboutDescription ?? ""}`,
-      `  - > ${firstParagraph ?? ""}`,
-    ].join("\n").trim();
+    const markdownSummary = `
+- ${repoUrl}
+  - > ${readmeTitle}
+  - > ${aboutDescription}
+  - > ${firstParagraph}
+`.trim();
 
     return {
       repoUrl,
