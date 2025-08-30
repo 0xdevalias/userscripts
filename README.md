@@ -45,7 +45,7 @@ Another open source alternative (that I haven't deeply explored / tried) is [Scr
   - https://github.com/scriptscat/scriptcat/blob/main/README_EN.md
   - [Install](https://github.com/scriptscat/scriptcat/blob/main/README_EN.md#-install-extension): [Chrome](https://chromewebstore.google.com/detail/scriptcat/ndcooeababalnlpkfedmmbbbgkljhpjf)
 
-And finally, if you have different preferences, the following more comprehensive (but older) guide was extracted from the [bvolpato/awesome-userscripts README](https://github.com/bvolpato/awesome-userscripts#how-to-use):
+And finally, if you have different preferences, the following more comprehensive (but older) guide was extracted from the [bvolpato/awesome-userscripts README](https://github.com/bvolpato/awesome-userscripts#how-to-use) (though this extract isn't updated with info on MV2 vs MV3 support):
 
 > To use user scripts you need to first install a user script manager. Here are managers for various browsers:
 > 
