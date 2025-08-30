@@ -39,7 +39,13 @@ I was forced to move back to Tampermonkey (which is not open source):
 
 That said, TamperMonkey has support for some more experimental features/API's that Violentmonley doesn't/won't support (eg. [`GM_webRequest(rules, listener)`](https://www.tampermonkey.net/documentation.php?locale=en#api:GM_webRequest), [`GM_cookie.*`](https://www.tampermonkey.net/documentation.php?locale=en#api:GM_cookie.list), etc; Ref: [violentmonkey#583](https://github.com/violentmonkey/violentmonkey/issues/583), [tampermonkey#397](https://github.com/Tampermonkey/tampermonkey/issues/397))
 
-But if you use a different browser, or have different preferences, the following more comprehensive guide was extracted from the [bvolpato/awesome-userscripts README](https://github.com/bvolpato/awesome-userscripts#how-to-use):
+Another open source alternative (that I haven't deeply explored / tried) is [ScriptCat](https://github.com/scriptscat/scriptcat/blob/main/README_EN.md), which is GPLv3 and updated for MV3:
+
+- https://github.com/scriptscat/scriptcat
+  - https://github.com/scriptscat/scriptcat/blob/main/README_EN.md
+  - [Install](https://github.com/scriptscat/scriptcat/blob/main/README_EN.md#-install-extension): [Chrome](https://chromewebstore.google.com/detail/scriptcat/ndcooeababalnlpkfedmmbbbgkljhpjf)
+
+And finally, if you have different preferences, the following more comprehensive (but older) guide was extracted from the [bvolpato/awesome-userscripts README](https://github.com/bvolpato/awesome-userscripts#how-to-use):
 
 > To use user scripts you need to first install a user script manager. Here are managers for various browsers:
 > 
