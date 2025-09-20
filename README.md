@@ -5,6 +5,7 @@ My user scripts to add functionality to various sites around the web (that were 
 ## Userscripts
 
 - [Amazon Prime Gaming Highlighter](./userscripts/amazon-prime-gaming-highlighter/) ([Install](https://github.com/0xdevalias/userscripts/raw/main/userscripts/amazon-prime-gaming-highlighter/amazon-prime-gaming-highlighter.user.js))
+- [Bypass Right-Click Jacking (While Key Held)](./userscripts/bypass-right-click-jacking-while-key-held/) ([Install](https://github.com/0xdevalias/userscripts/raw/main/userscripts/bypass-right-click-jacking-while-key-held/bypass-right-click-jacking-while-key-held.user.js))
 - [ChatGPT Web App Script Update Notifier](./userscripts/chatgpt-web-app-script-update-notifier/) ([Install](https://github.com/0xdevalias/userscripts/raw/main/userscripts/chatgpt-web-app-script-update-notifier/chatgpt-web-app-script-update-notifier.user.js))
 - [Copy GitHub Repo Summary](./userscripts/copy-github-repo-summary/) ([Install](https://github.com/0xdevalias/userscripts/raw/main/userscripts/copy-github-repo-summary/copy-github-repo-summary.user.js))
 - [Freshdesk Make 'Redactor Editor' Resizeable](./userscripts/freshdesk-make-redactor-editor-resizeable/) ([Install](https://github.com/0xdevalias/userscripts/raw/main/userscripts/freshdesk-make-redactor-editor-resizeable/freshdesk-make-redactor-editor-resizeable.user.js))
