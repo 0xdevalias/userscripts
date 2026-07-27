@@ -7,7 +7,7 @@
 // @downloadURL   https://github.com/0xdevalias/userscripts/raw/main/userscripts/copy-github-repo-summary/copy-github-repo-summary.user.js
 // @icon          https://www.google.com/s2/favicons?sz=64&domain=github.com
 // @namespace     https://www.devalias.net/
-// @version       0.1.3
+// @version       0.1.4
 // @match         https://github.com/*/*
 // @run-at        document-start
 // @grant         GM_registerMenuCommand
@@ -38,15 +38,12 @@
       }
     }
 
-    const aboutHeading = [...document.querySelectorAll(".Layout-sidebar h2")]
+    const aboutHeading = [...document.querySelectorAll('[data-component="SplitPageLayout.Pane"] h2[data-component="Heading"]')]
       .find(h2 => h2.textContent.trim().toLowerCase() === "about");
 
-    const aboutP =
-      aboutHeading?.nextElementSibling?.tagName === "P"
-        ? aboutHeading.nextElementSibling
-        : null;
+    const aboutDescriptionContainer = aboutHeading?.parentElement.querySelector('p[class*="SidebarAbout-module__description"]');
 
-    const aboutDescription = aboutP?.textContent?.trim() ?? "";
+    const aboutDescription = aboutDescriptionContainer?.textContent?.trim() ?? "";
 
     const markdownSummary = `
 - ${repoUrl}
